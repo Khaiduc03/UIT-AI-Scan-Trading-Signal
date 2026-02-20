@@ -1,0 +1,4 @@
+interface:
+  display_name: "Trading Data Pipeline"
+  short_description: "Run and validate BTC OHLCV data workflow."
+  default_prompt: "Use $trading-data-pipeline to download and validate BTCUSDT 15m raw data in this repo."

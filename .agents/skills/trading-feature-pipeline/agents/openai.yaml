@@ -1,0 +1,4 @@
+interface:
+  display_name: "Trading Feature Pipeline"
+  short_description: "Build and check phase-2 scanner features."
+  default_prompt: "Use $trading-feature-pipeline to build and verify features_core and features_structure outputs."

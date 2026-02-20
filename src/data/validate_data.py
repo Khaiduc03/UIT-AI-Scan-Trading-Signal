@@ -23,7 +23,7 @@ def validate_data(df: pd.DataFrame, expected_columns: list) -> dict:
         "has_duplicates": False,
         "missing_columns": [],
         "has_nans": False,
-        "errors": []
+        "errors": [],
     }
 
     # 1. Check columns
@@ -36,7 +36,7 @@ def validate_data(df: pd.DataFrame, expected_columns: list) -> dict:
     if df.isnull().values.any():
         report["has_nans"] = True
         report["errors"].append("Data contains NaN values.")
-        
+
         # Log NaN details
         nan_counts = df.isnull().sum()
         nan_cols = nan_counts[nan_counts > 0].to_dict()
@@ -55,7 +55,7 @@ def validate_data(df: pd.DataFrame, expected_columns: list) -> dict:
         if df["time"].duplicated().any():
             report["has_duplicates"] = True
             report["errors"].append("Duplicate timestamps found.")
-            
+
             duplicate_count = df["time"].duplicated().sum()
             logger.warning(f"Found {duplicate_count} duplicate timestamps.")
 
@@ -65,27 +65,27 @@ def validate_data(df: pd.DataFrame, expected_columns: list) -> dict:
 def main():
     config = load_config()
     output_csv = config.get("data", {}).get("output_csv", "artifacts/raw/BTCUSDT_15m.csv")
-    
+
     # We can hardcode report path or read from config if it existed, we'll put it in reports dir
     report_path = "artifacts/reports/data_quality.json"
 
     logger.info(f"Loading data from {output_csv} for validation...")
-    
+
     try:
         df = pd.read_csv(output_csv)
     except FileNotFoundError:
         logger.error(f"File {output_csv} not found. Ensure download step completed successfully.")
         return
-        
+
     expected_columns = ["time", "open", "high", "low", "close", "volume"]
-    
+
     logger.info("Starting validation...")
     report = validate_data(df, expected_columns)
-    
+
     # Check overall status
     is_valid = len(report["errors"]) == 0
     report["is_valid"] = is_valid
-    
+
     # Print summary
     if is_valid:
         logger.info(f"Data validation PASSED. Checked {report['total_rows']} rows.")
@@ -97,10 +97,10 @@ def main():
     # Save report
     out_dir = Path(report_path).parent
     out_dir.mkdir(parents=True, exist_ok=True)
-    
+
     with open(report_path, "w") as f:
         json.dump(report, f, indent=4)
-        
+
     logger.info(f"Validation report saved to {report_path}")
 
 
