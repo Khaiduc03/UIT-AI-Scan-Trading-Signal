@@ -128,11 +128,14 @@ make run-train-model1 # train phase-5 baseline model + metrics report
 make run-scanner-report # phase-6 prompt 1: zoneRisk + threshold report
 make run-hotzones # phase-6 prompt 2: hotzone extraction
 make run-leakage-checks # phase-6 prompt 3: leakage + artifact sanity checks
+make run-all-phases # run full pipeline phase 1 -> phase 6
 ```
 
 ## Command meanings
 
 - `make run-download`: tải dữ liệu BTCUSDT 15m vào `artifacts/raw/`.
+  Nếu file raw đã tồn tại, lệnh sẽ hỏi có tải lại hay không (`y/N`).
+  Dùng `REDOWNLOAD=1 make run-download` để ép tải lại trong non-interactive mode.
 - `make run-validate`: kiểm tra chất lượng dữ liệu raw và ghi report.
 - `make run-features`: tạo features Phase 2 (`features_core`, `features_structure`).
 - `make run-labels`: tạo label StrongMove + report phân phối nhãn.

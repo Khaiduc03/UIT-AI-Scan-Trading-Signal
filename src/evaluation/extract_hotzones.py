@@ -1,6 +1,7 @@
 import json
 import logging
 from pathlib import Path
+from time import perf_counter
 
 import numpy as np
 import pandas as pd
@@ -67,6 +68,8 @@ def build_hotzones(
 
 
 def main():
+    start_time = perf_counter()
+
     cfg = load_config()
     scanner_cfg = cfg.get("scanner", {})
 
@@ -105,6 +108,15 @@ def main():
         json.dump(output, file, indent=2)
 
     logger.info("Hotzones saved: %s (zones=%s)", out_hotzones, len(zones))
+    logger.info(
+        "Hotzone summary | hot_threshold=%.2f | min_zone_bars=%s | "
+        "max_gap_bars=%s | total_hot_bars=%s | elapsed=%.2fs",
+        hot_threshold,
+        min_zone_bars,
+        max_gap_bars,
+        total_hot_bars,
+        perf_counter() - start_time,
+    )
 
 
 if __name__ == "__main__":

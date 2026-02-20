@@ -1,6 +1,7 @@
 import json
 import logging
 from pathlib import Path
+from time import perf_counter
 
 import pandas as pd
 import yaml
@@ -212,6 +213,8 @@ def build_split_metadata(
 
 
 def main():
+    start_time = perf_counter()
+
     # 1) Đọc config + resolve input/output paths.
     cfg = load_config("configs/config.yaml")
 
@@ -288,6 +291,20 @@ def main():
         len(val_df),
         len(test_df),
         method,
+    )
+    logger.info(
+        "Dataset summary | target_rate train/val/test = %.4f / %.4f / %.4f | "
+        "time train=%s -> %s | val=%s -> %s | test=%s -> %s | elapsed=%.2fs",
+        float(train_df["StrongMove"].mean()),
+        float(val_df["StrongMove"].mean()),
+        float(test_df["StrongMove"].mean()),
+        train_df["time"].iloc[0],
+        train_df["time"].iloc[-1],
+        val_df["time"].iloc[0],
+        val_df["time"].iloc[-1],
+        test_df["time"].iloc[0],
+        test_df["time"].iloc[-1],
+        perf_counter() - start_time,
     )
 
 

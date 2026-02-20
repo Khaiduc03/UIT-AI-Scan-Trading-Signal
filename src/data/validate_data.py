@@ -1,6 +1,7 @@
 import json
 import logging
 from pathlib import Path
+from time import perf_counter
 
 import pandas as pd
 import yaml
@@ -69,6 +70,8 @@ def validate_data(df: pd.DataFrame, expected_columns: list) -> dict:
 
 
 def main():
+    start_time = perf_counter()
+
     # 1) Lấy đường dẫn input từ config.
     config = load_config()
     output_csv = config.get("data", {}).get("output_csv", "artifacts/raw/BTCUSDT_15m.csv")
@@ -111,6 +114,13 @@ def main():
         json.dump(report, f, indent=4)
 
     logger.info(f"Validation report saved to {report_path}")
+    logger.info(
+        "Validation summary | status=%s | rows=%s | errors=%s | elapsed=%.2fs",
+        "PASS" if is_valid else "FAIL",
+        report["total_rows"],
+        len(report["errors"]),
+        perf_counter() - start_time,
+    )
 
 
 if __name__ == "__main__":

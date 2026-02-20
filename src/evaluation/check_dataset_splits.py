@@ -1,6 +1,7 @@
 import json
 import logging
 from pathlib import Path
+from time import perf_counter
 
 import numpy as np
 import pandas as pd
@@ -146,6 +147,7 @@ def run_checks() -> dict:
 
 
 def main():
+    start_time = perf_counter()
     report = run_checks()
     logger.info("Dataset checks status: %s", report["status"])
     logger.info("Check report saved at artifacts/reports/dataset_checks.json")
@@ -155,6 +157,14 @@ def main():
         report["class_balance"]["val"]["positive_rate"],
         report["class_balance"]["test"]["positive_rate"],
     )
+    top_shift = report["drift_train_vs_test"]["top_mean_shift_features"]
+    if top_shift:
+        logger.info(
+            "Top drift feature: %s (mean_shift_sigma=%.4f)",
+            top_shift[0]["feature"],
+            top_shift[0]["mean_shift_sigma"],
+        )
+    logger.info("Dataset checks elapsed=%.2fs", perf_counter() - start_time)
 
 
 if __name__ == "__main__":

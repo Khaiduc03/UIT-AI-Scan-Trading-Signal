@@ -3,6 +3,7 @@ import logging
 import math
 from datetime import datetime, timezone
 from pathlib import Path
+from time import perf_counter
 
 import joblib
 import numpy as np
@@ -337,6 +338,8 @@ def top_logreg_coefs(pipeline: Pipeline, feature_columns: list[str], top_n: int 
 
 
 def main():
+    start_time = perf_counter()
+
     cfg = load_config()
     model_cfg = cfg.get("model1", {})
     run_cfg = cfg.get("run", {})
@@ -480,6 +483,17 @@ def main():
     if np.any((p_loaded < 0.0) | (p_loaded > 1.0)):
         raise ValueError("Loaded model produced invalid probabilities outside [0,1]")
     logger.info("Artifact load/predict check passed (probabilities in [0,1]).")
+    logger.info(
+        "Train summary | model=%s | features=%s | threshold=%.4f | "
+        "val_pr_auc=%.4f | test_pr_auc=%.4f | test_f1=%.4f | elapsed=%.2fs",
+        model_path,
+        len(feature_cols),
+        threshold,
+        val_metrics["pr_auc"],
+        test_metrics["pr_auc"],
+        test_metrics["f1"],
+        perf_counter() - start_time,
+    )
 
 
 if __name__ == "__main__":

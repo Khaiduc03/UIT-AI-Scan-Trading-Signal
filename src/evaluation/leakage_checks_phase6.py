@@ -1,6 +1,7 @@
 import json
 import logging
 from pathlib import Path
+from time import perf_counter
 
 import joblib
 import pandas as pd
@@ -234,9 +235,20 @@ def run_checks() -> dict:
 
 
 def main():
+    start_time = perf_counter()
     result = run_checks()
     logger.info("Leakage checks status: %s", result["overall_status"])
     logger.info("Leakage report saved: %s", result["artifacts"]["leakage_report_path"])
+    status_counts = {"PASS": 0, "WARN": 0, "FAIL": 0}
+    for item in result["checks"]:
+        status_counts[item["status"]] = status_counts.get(item["status"], 0) + 1
+    logger.info(
+        "Leakage summary | pass=%s warn=%s fail=%s | elapsed=%.2fs",
+        status_counts.get("PASS", 0),
+        status_counts.get("WARN", 0),
+        status_counts.get("FAIL", 0),
+        perf_counter() - start_time,
+    )
 
 
 if __name__ == "__main__":

@@ -1,6 +1,7 @@
 import json
 import logging
 from pathlib import Path
+from time import perf_counter
 
 import joblib
 import numpy as np
@@ -118,6 +119,8 @@ def threshold_metrics(
 
 
 def main():
+    start_time = perf_counter()
+
     cfg = load_config()
     split_cfg = cfg.get("split", {})
     model_cfg = cfg.get("model1", {})
@@ -183,6 +186,25 @@ def main():
 
     logger.info("zoneRisk series saved: %s", out_zone_path)
     logger.info("Threshold report saved: %s", out_report_path)
+    for row in report_rows:
+        logger.info(
+            "Threshold %.2f | flagged=%s | coverage=%.4f | hit_rate=%s | lift=%s | hit_within_k=%s",
+            row["threshold"],
+            row["flagged_bars"],
+            row["coverage"],
+            "null" if row["hit_rate"] is None else f"{row['hit_rate']:.4f}",
+            "null" if row["lift_vs_base"] is None else f"{row['lift_vs_base']:.3f}",
+            "null"
+            if row["hit_within_k_rate"] is None
+            else f"{row['hit_within_k_rate']:.4f}",
+        )
+    logger.info(
+        "Scanner summary | rows=%s | base_rate=%.4f | thresholds=%s | elapsed=%.2fs",
+        len(zone_df),
+        base_rate,
+        thresholds,
+        perf_counter() - start_time,
+    )
 
 
 if __name__ == "__main__":

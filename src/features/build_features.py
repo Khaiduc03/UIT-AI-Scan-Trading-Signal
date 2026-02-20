@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from time import perf_counter
 
 import numpy as np
 import pandas as pd
@@ -141,6 +142,8 @@ def apply_warmup(df: pd.DataFrame, warmup_bars: int) -> pd.DataFrame:
 
 
 def main():
+    start_time = perf_counter()
+
     # 1) Đọc config + xác định input/output path.
     cfg = load_config("configs/config.yaml")
 
@@ -192,6 +195,17 @@ def main():
     structure_df.to_parquet(structure_path, index=False)
 
     logger.info(f"Done. core_rows={len(core_df)}, structure_rows={len(structure_df)}")
+    logger.info(
+        "Feature summary | raw_rows=%s | warmup_bars=%s | "
+        "core_time=%s -> %s | structure_time=%s -> %s | elapsed=%.2fs",
+        len(raw_df),
+        warmup_bars,
+        core_df["time"].iloc[0] if len(core_df) else "n/a",
+        core_df["time"].iloc[-1] if len(core_df) else "n/a",
+        structure_df["time"].iloc[0] if len(structure_df) else "n/a",
+        structure_df["time"].iloc[-1] if len(structure_df) else "n/a",
+        perf_counter() - start_time,
+    )
 
 
 if __name__ == "__main__":

@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from time import perf_counter
 
 import ccxt
 import pandas as pd
@@ -8,6 +9,12 @@ import yaml
 # Set up logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
+
+
+def _file_size_mb(path: Path) -> float:
+    if not path.exists():
+        return 0.0
+    return float(path.stat().st_size / (1024 * 1024))
 
 
 # Đọc file cấu hình chung của project.
@@ -105,6 +112,8 @@ def fetch_ohlcv(
 
 
 def main():
+    start_time = perf_counter()
+
     # 1) Đọc cấu hình.
     config = load_config()
     data_cfg = config.get("data", {})
@@ -142,7 +151,17 @@ def main():
 
     logger.info(f"Saving data to {output_path}...")
     df.to_csv(output_path, index=False)
+    out_path = Path(output_path)
+    elapsed = perf_counter() - start_time
     logger.info("Data ingestion completed successfully.")
+    logger.info(
+        "Download summary | rows=%s | time_range=%s -> %s | file=%.2fMB | elapsed=%.2fs",
+        len(df),
+        df["time"].iloc[0],
+        df["time"].iloc[-1],
+        _file_size_mb(out_path),
+        elapsed,
+    )
 
 
 if __name__ == "__main__":

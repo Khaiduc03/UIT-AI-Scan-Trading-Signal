@@ -1,6 +1,7 @@
 import json
 import logging
 from pathlib import Path
+from time import perf_counter
 
 import numpy as np
 import pandas as pd
@@ -116,6 +117,8 @@ def build_distribution_report(
 # - Build StrongMove labels
 # - Ghi parquet + JSON report
 def main():
+    start_time = perf_counter()
+
     cfg = load_config("configs/config.yaml")
 
     data_cfg = cfg.get("data", {})
@@ -176,6 +179,17 @@ def main():
         out_labels_path,
     )
     logger.info(f"Distribution report saved: {out_report_path}")
+    logger.info(
+        "Label summary | raw_rows=%s | core_rows=%s | labeled_rows=%s | "
+        "dropped_tail=%s | time=%s -> %s | elapsed=%.2fs",
+        len(raw_df),
+        len(features_core_df),
+        len(labels_df),
+        max(0, len(features_core_df) - len(labels_df)),
+        labels_df["time"].iloc[0] if len(labels_df) else "n/a",
+        labels_df["time"].iloc[-1] if len(labels_df) else "n/a",
+        perf_counter() - start_time,
+    )
 
 
 if __name__ == "__main__":
