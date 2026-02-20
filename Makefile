@@ -1,7 +1,7 @@
 PYTHON := .venv/bin/python
 PIP := .venv/bin/pip
 
-.PHONY: setup dev lock check lint format test run-download run-validate run-features clean
+.PHONY: setup dev lock check lint format test run-download run-validate run-features run-labels clean
 
 setup:
 	python3 -m venv .venv
@@ -34,6 +34,9 @@ run-validate:
 
 run-features:
 	$(PYTHON) src/features/build_features.py
+
+run-labels:
+	$(PYTHON) src/labels/build_labels.py
 
 clean:
 	find . -type d -name "__pycache__" -prune -exec rm -rf {} +

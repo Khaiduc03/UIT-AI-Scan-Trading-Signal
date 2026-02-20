@@ -34,6 +34,17 @@ Outputs:
 - `artifacts/processed/features_core.parquet`
 - `artifacts/processed/features_structure.parquet`
 
+## Run labeling (Phase 3)
+
+```bash
+source .venv/bin/activate
+python src/labels/build_labels.py
+```
+
+Outputs:
+- `artifacts/processed/labels_strongmove.parquet`
+- `artifacts/reports/labels_strongmove_report.json`
+
 ## Project Rules
 
 - Rules document: `PROJECT_RULES.md`
@@ -54,6 +65,7 @@ make check          # lint + test
 make run-download   # download raw OHLCV
 make run-validate   # validate raw data
 make run-features   # build phase-2 features
+make run-labels     # build phase-3 StrongMove labels
 ```
 
 ## Project Structure

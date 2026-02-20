@@ -24,6 +24,7 @@
 - Download raw OHLCV: `make run-download`
 - Validate raw data: `make run-validate`
 - Build phase-2 features: `make run-features`
+- Build phase-3 labels: `make run-labels`
 
 ## 5) No-lookahead rule
 - Any feature at time `t` must not use data from `t+1` onward.
@@ -32,4 +33,5 @@
 ## 6) Artifacts and generated files
 - Keep venv and caches out of git.
 - Feature outputs in `artifacts/processed/` are generated artifacts.
+- Label outputs in `artifacts/processed/` and `artifacts/reports/` are generated artifacts.
 - Re-generate artifacts from scripts, do not hand-edit them.

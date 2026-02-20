@@ -10,11 +10,13 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 
+# Đọc config chung của project.
 def load_config(config_path: str = "configs/config.yaml") -> dict:
     with open(config_path, "r") as file:
         return yaml.safe_load(file)
 
 
+# Đọc dữ liệu raw và đảm bảo đủ cột OHLCV tối thiểu.
 def load_raw_data(input_csv: str) -> pd.DataFrame:
     df = pd.read_csv(input_csv)
     expected_cols = ["time", "open", "high", "low", "close", "volume"]
@@ -24,6 +26,8 @@ def load_raw_data(input_csv: str) -> pd.DataFrame:
     return df
 
 
+# ATR được tính thuần từ quá khứ/hiện tại tại mỗi bar.
+# Đây là biến nền cho cả feature volatility và label StrongMove.
 def compute_atr(df: pd.DataFrame, atr_period: int) -> pd.Series:
     prev_close = df["close"].shift(1)
     tr = pd.concat(
@@ -37,6 +41,10 @@ def compute_atr(df: pd.DataFrame, atr_period: int) -> pd.Series:
     return tr.rolling(window=atr_period, min_periods=atr_period).mean()
 
 
+# Build nhóm feature "core" theo config:
+# - volatility: atr14, atr_pct, range1
+# - returns: ret1/ret3/ret6, abs_ret1
+# - volume: vol_sma50, vol_ratio
 def build_core_features(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
     feat_cfg = cfg.get("features", {})
     atr_period = int(feat_cfg.get("atr_period", 14))
@@ -70,6 +78,10 @@ def build_core_features(df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
     return out
 
 
+# Detect swing high/low theo pivot có độ trễ xác nhận = swing_size.
+# Ý nghĩa:
+# - Pivot tại i chỉ được phép xuất hiện ở index i + swing_size
+# - Nhờ vậy tránh leak tương lai vào trạng thái tại thời điểm t
 def detect_confirmed_swings(df: pd.DataFrame, swing_size: int) -> tuple[pd.Series, pd.Series]:
     n = len(df)
     highs = df["high"].to_numpy()
@@ -78,7 +90,7 @@ def detect_confirmed_swings(df: pd.DataFrame, swing_size: int) -> tuple[pd.Serie
     confirmed_swing_high = np.full(n, np.nan)
     confirmed_swing_low = np.full(n, np.nan)
 
-    # Pivot at i is only known at i + swing_size (confirmation delay).
+    # Pivot tại i chỉ "được biết" ở i + swing_size (confirmation delay).
     for i in range(swing_size, n - swing_size):
         left_high = highs[i - swing_size : i]
         right_high = highs[i + 1 : i + swing_size + 1]
@@ -97,6 +109,9 @@ def detect_confirmed_swings(df: pd.DataFrame, swing_size: int) -> tuple[pd.Serie
     return pd.Series(confirmed_swing_high), pd.Series(confirmed_swing_low)
 
 
+# Build nhóm feature "structure" từ swings đã xác nhận:
+# - last_swing_high / last_swing_low
+# - khoảng cách theo ATR tới cấu trúc gần nhất
 def build_structure_features(df: pd.DataFrame, core_df: pd.DataFrame, cfg: dict) -> pd.DataFrame:
     swing_size = int(cfg.get("features", {}).get("swing_size", 5))
 
@@ -118,6 +133,7 @@ def build_structure_features(df: pd.DataFrame, core_df: pd.DataFrame, cfg: dict)
     return out
 
 
+# Bỏ warmup bars đầu để indicator ổn định và giảm nhiễu NaN giai đoạn đầu.
 def apply_warmup(df: pd.DataFrame, warmup_bars: int) -> pd.DataFrame:
     if warmup_bars <= 0:
         return df
@@ -125,6 +141,7 @@ def apply_warmup(df: pd.DataFrame, warmup_bars: int) -> pd.DataFrame:
 
 
 def main():
+    # 1) Đọc config + xác định input/output path.
     cfg = load_config("configs/config.yaml")
 
     input_csv = cfg.get("data", {}).get("output_csv", "artifacts/raw/BTCUSDT_15m.csv")
@@ -135,9 +152,11 @@ def main():
     structure_path = processed_dir / "features_structure.parquet"
     processed_dir.mkdir(parents=True, exist_ok=True)
 
+    # 2) Đọc dữ liệu raw.
     logger.info(f"Loading raw data from {input_csv}...")
     raw_df = load_raw_data(input_csv)
 
+    # 3) Build core features và loại hàng thiếu cột cốt lõi.
     logger.info("Building core features...")
     core_raw = build_core_features(raw_df, cfg)
     core_df = apply_warmup(core_raw, warmup_bars=warmup_bars)
@@ -154,16 +173,18 @@ def main():
     ]
     core_df = core_df.dropna(subset=core_required)
 
+    # 4) Build structure features từ swing đã xác nhận.
     logger.info("Building structure features...")
     structure_df = build_structure_features(raw_df, core_raw, cfg)
     structure_df = apply_warmup(structure_df, warmup_bars=warmup_bars)
 
-    # Keep rows where at least one swing side is known, but avoid dropping all data if sparse.
+    # Giữ các hàng có ít nhất một phía structure được xác định.
     structure_df = structure_df.dropna(
         subset=["dist_high_atr", "dist_low_atr", "near_structure"],
         how="all",
     )
 
+    # 5) Ghi output parquet cho Phase 2.
     logger.info(f"Saving core features to {core_path}...")
     core_df.to_parquet(core_path, index=False)
 

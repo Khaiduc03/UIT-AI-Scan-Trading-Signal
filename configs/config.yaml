@@ -75,6 +75,9 @@ label:
 
   # Optional: nhãn phá cấu trúc (v2 bật)
   enable_breakstructure: false
+  out_strongmove: "artifacts/processed/labels_strongmove.parquet"
+  out_strongmove_report: "artifacts/reports/labels_strongmove_report.json"
+  out_breakstructure: "artifacts/processed/labels_breakstructure.parquet"
 
 # ------------------------------------------------------------
 # 4) SPLIT SETTINGS (bắt buộc time-based, KHÔNG shuffle)

@@ -10,6 +10,8 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 
+# Đọc file cấu hình chung của project.
+# Hàm này được dùng để tránh hardcode symbol/timeframe/date trong code.
 def load_config(config_path: str = "configs/config.yaml") -> dict:
     """Load configuration from YAML file."""
     try:
@@ -27,7 +29,8 @@ def fetch_ohlcv(
     start_date: str,
     end_date: str,
 ) -> pd.DataFrame:
-    """Fetch OHLCV historical data using CCXT."""
+    # Tải dữ liệu OHLCV theo từng batch từ CCXT trong khoảng [start_date, end_date].
+    # Trả về DataFrame chuẩn cột: time, open, high, low, close, volume.
     logger.info(f"Connecting to {exchange_name}...")
 
     # Initialize exchange
@@ -38,7 +41,7 @@ def fetch_ohlcv(
         }
     )
 
-    # Convert dates to timestamps
+    # Đổi mốc ngày sang timestamp milliseconds để CCXT dùng được.
     since_ts = exchange.parse8601(f"{start_date}T00:00:00Z")
     until_ts = exchange.parse8601(f"{end_date}T00:00:00Z")
 
@@ -60,15 +63,14 @@ def fetch_ohlcv(
                 logger.info("No more data received. Stopping fetch.")
                 break
 
-            # Filter out entries past the end_date if the api returns them
+            # Bảo vệ boundary cuối kỳ: loại các nến vượt quá end_date.
             filtered_ohlcv = [entry for entry in ohlcv if entry[0] <= until_ts]
             if not filtered_ohlcv:
                 break
 
             all_ohlcv.extend(filtered_ohlcv)
 
-            # Update 'since_ts' to the timestamp of the last fetched candle + 1ms
-            # to avoid fetching the same candle twice, though some exchanges handle this differently
+            # Tiến con trỏ đến sau nến cuối cùng để tránh lặp dữ liệu.
             last_ts = filtered_ohlcv[-1][0]
             since_ts = last_ts + 1
 
@@ -92,11 +94,10 @@ def fetch_ohlcv(
         logger.warning(f"No data found for {symbol} in the specified date range.")
         return pd.DataFrame()
 
-    # Convert to DataFrame
+    # Chuẩn hóa dữ liệu về DataFrame.
     df = pd.DataFrame(all_ohlcv, columns=["time", "open", "high", "low", "close", "volume"])
 
-    # Save time as ISO8601 text for consistent downstream usage.
-
+    # Chuẩn hóa time thành chuỗi ISO UTC để downstream dùng nhất quán.
     df["time"] = pd.to_datetime(df["time"], unit="ms", utc=True).dt.strftime("%Y-%m-%dT%H:%M:%SZ")
 
     logger.info(f"Successfully fetched {len(df)} total candles.")
@@ -104,15 +105,12 @@ def fetch_ohlcv(
 
 
 def main():
-    # 1. Load config
+    # 1) Đọc cấu hình.
     config = load_config()
     data_cfg = config.get("data", {})
 
-    symbol = data_cfg.get("symbol", "BTC/USDT")  # ccxt format often requires slash
-    # Binance in ccxt often takes BTC/USDT. Our config says BTCUSDT. Let's adapt if needed.
-    # In CCXT binance spot, BTC/USDT is the universal symbol name.
-    # If the config is "BTCUSDT", we might need to insert a slash for CCXT if it complains,
-    # but let's try to format it from config when slash is missing.
+    # CCXT thường cần symbol dạng BTC/USDT, còn config có thể là BTCUSDT.
+    symbol = data_cfg.get("symbol", "BTC/USDT")
     if "/" not in symbol and len(symbol) > 3:
         if symbol.endswith("USDT"):
             symbol = symbol.replace("USDT", "/USDT")
@@ -124,7 +122,7 @@ def main():
     end_date = data_cfg.get("end_date", "2026-02-01")
     output_path = data_cfg.get("output_csv", "artifacts/raw/BTCUSDT_15m.csv")
 
-    # 2. Fetch data
+    # 2) Tải dữ liệu từ sàn.
     df = fetch_ohlcv(
         exchange_name=exchange_name,
         symbol=symbol,
@@ -137,8 +135,8 @@ def main():
         logger.error("Data ingestion failed resulting in an empty DataFrame.")
         return
 
-    # 3. Save to CSV
-    # Ensure directory exists
+    # 3) Ghi CSV ra artifacts/raw.
+    # Đảm bảo thư mục đích tồn tại.
     out_dir = Path(output_path).parent
     out_dir.mkdir(parents=True, exist_ok=True)
 

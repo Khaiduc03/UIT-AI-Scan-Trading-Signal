@@ -1,0 +1,11 @@
+{
+  "total_rows": 72841,
+  "positive_count": 52916,
+  "negative_count": 19925,
+  "positive_rate": 0.7264589997391578,
+  "horizon_k": 12,
+  "strongmove_atr_mult": 2.5,
+  "source_raw_path": "artifacts/raw/BTCUSDT_15m.csv",
+  "source_features_path": "artifacts/processed/features_core.parquet",
+  "output_labels_path": "artifacts/processed/labels_strongmove.parquet"
+}
