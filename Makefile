@@ -1,7 +1,7 @@
 PYTHON := .venv/bin/python
 PIP := .venv/bin/pip
 
-.PHONY: setup dev lock check lint format test run-download run-validate run-features run-labels clean
+.PHONY: setup dev lock check lint format test run-download run-validate run-features run-labels run-dataset run-dataset-checks clean
 
 setup:
 	python3 -m venv .venv
@@ -37,6 +37,12 @@ run-features:
 
 run-labels:
 	$(PYTHON) src/labels/build_labels.py
+
+run-dataset:
+	$(PYTHON) src/models/build_dataset.py
+
+run-dataset-checks:
+	$(PYTHON) src/evaluation/check_dataset_splits.py
 
 clean:
 	find . -type d -name "__pycache__" -prune -exec rm -rf {} +

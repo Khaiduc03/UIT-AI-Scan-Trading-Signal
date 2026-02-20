@@ -25,6 +25,8 @@
 - Validate raw data: `make run-validate`
 - Build phase-2 features: `make run-features`
 - Build phase-3 labels: `make run-labels`
+- Build phase-4 dataset split: `make run-dataset`
+- Run post-split checks: `make run-dataset-checks`
 
 ## 5) No-lookahead rule
 - Any feature at time `t` must not use data from `t+1` onward.

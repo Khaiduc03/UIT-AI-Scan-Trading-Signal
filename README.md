@@ -45,6 +45,20 @@ Outputs:
 - `artifacts/processed/labels_strongmove.parquet`
 - `artifacts/reports/labels_strongmove_report.json`
 
+## Run dataset build + time split (Phase 4)
+
+```bash
+source .venv/bin/activate
+python src/models/build_dataset.py
+```
+
+Outputs:
+- `artifacts/processed/dataset_model1.parquet`
+- `artifacts/processed/train.parquet`
+- `artifacts/processed/val.parquet`
+- `artifacts/processed/test.parquet`
+- `artifacts/processed/splits.json`
+
 ## Project Rules
 
 - Rules document: `PROJECT_RULES.md`
@@ -66,6 +80,8 @@ make run-download   # download raw OHLCV
 make run-validate   # validate raw data
 make run-features   # build phase-2 features
 make run-labels     # build phase-3 StrongMove labels
+make run-dataset    # build phase-4 dataset + time split
+make run-dataset-checks # check split consistency, class balance, drift
 ```
 
 ## Project Structure

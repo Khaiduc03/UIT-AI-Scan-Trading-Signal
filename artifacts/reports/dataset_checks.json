@@ -1,0 +1,140 @@
+{
+  "status": "pass",
+  "checks": {
+    "same_schema_all_splits": true,
+    "target_exists": true,
+    "time_sorted_dataset": true,
+    "no_overlap": true,
+    "strict_time_order": true,
+    "full_coverage": true,
+    "metadata_counts_match_files": true
+  },
+  "class_balance": {
+    "dataset": {
+      "rows": 72841,
+      "positive_count": 52916,
+      "negative_count": 19925,
+      "positive_rate": 0.7264589997391578
+    },
+    "train": {
+      "rows": 50988,
+      "positive_count": 36933,
+      "negative_count": 14055,
+      "positive_rate": 0.7243469051541539
+    },
+    "val": {
+      "rows": 10926,
+      "positive_count": 8171,
+      "negative_count": 2755,
+      "positive_rate": 0.7478491671242907
+    },
+    "test": {
+      "rows": 10927,
+      "positive_count": 7812,
+      "negative_count": 3115,
+      "positive_rate": 0.7149263292761051
+    }
+  },
+  "drift_train_vs_test": {
+    "feature_count_checked": 14,
+    "top_mean_shift_features": [
+      {
+        "feature": "last_swing_low",
+        "mean_train": 74753.20758649093,
+        "mean_test": 95157.03540404502,
+        "std_train": 18745.62231453968,
+        "std_test": 9293.150414341566,
+        "mean_shift_sigma": 1.0884582797621105,
+        "std_ratio_test_train": 0.4957504348699863
+      },
+      {
+        "feature": "last_swing_high",
+        "mean_train": 75847.9114817212,
+        "mean_test": 96415.6751770843,
+        "std_train": 18956.958446609104,
+        "std_test": 9471.05110617378,
+        "mean_shift_sigma": 1.0849717138585662,
+        "std_ratio_test_train": 0.4996081588113572
+      },
+      {
+        "feature": "vol_sma50",
+        "mean_train": 332.8072652453754,
+        "mean_test": 210.00298420710166,
+        "std_train": 233.2114065752296,
+        "std_test": 147.82038770565723,
+        "mean_shift_sigma": 0.526579222010133,
+        "std_ratio_test_train": 0.6338471598642519
+      },
+      {
+        "feature": "atr14",
+        "mean_train": 265.58119260554304,
+        "mean_test": 301.08492325693896,
+        "std_train": 169.2836824350686,
+        "std_test": 184.9629818345069,
+        "mean_shift_sigma": 0.20972919622665773,
+        "std_ratio_test_train": 1.0926214456933925
+      },
+      {
+        "feature": "atr_pct",
+        "mean_train": 0.0035608856481023064,
+        "mean_test": 0.0031395356658457034,
+        "std_train": 0.0021370683378972703,
+        "std_test": 0.0018776142920936473,
+        "mean_shift_sigma": 0.1971626150589176,
+        "std_ratio_test_train": 0.8785934721500289
+      },
+      {
+        "feature": "range1",
+        "mean_train": 265.57816054757984,
+        "mean_test": 301.4103770476801,
+        "std_train": 231.05980224125372,
+        "std_test": 270.01807849558315,
+        "mean_shift_sigma": 0.15507767319339696,
+        "std_ratio_test_train": 1.168606896900445
+      },
+      {
+        "feature": "abs_ret1",
+        "mean_train": 0.0018226421935769294,
+        "mean_test": 0.001622584143057789,
+        "std_train": 0.002083786022927067,
+        "std_test": 0.0018954834235742207,
+        "mean_shift_sigma": 0.0960070027449913,
+        "std_ratio_test_train": 0.9096343875087641
+      },
+      {
+        "feature": "dist_high_atr",
+        "mean_train": 1.8983610548978647,
+        "mean_test": 2.1153976560518255,
+        "std_train": 2.4257953767852416,
+        "std_test": 2.620187511623036,
+        "mean_shift_sigma": 0.08947028394517624,
+        "std_ratio_test_train": 1.0801354214362178
+      },
+      {
+        "feature": "ret6",
+        "mean_train": 0.00012831475237788916,
+        "mean_test": -0.000228981464246181,
+        "std_train": 0.0066922422028058105,
+        "std_test": 0.006001907291414955,
+        "mean_shift_sigma": 0.05338961229180847,
+        "std_ratio_test_train": 0.8968454979112577
+      },
+      {
+        "feature": "dist_low_atr",
+        "mean_train": 2.276096335210601,
+        "mean_test": 2.14241429405301,
+        "std_train": 2.588155711199725,
+        "std_test": 2.679104624466643,
+        "mean_shift_sigma": 0.05165146771465762,
+        "std_ratio_test_train": 1.035140433348859
+      }
+    ]
+  },
+  "paths": {
+    "dataset": "artifacts/processed/dataset_model1.parquet",
+    "train": "artifacts/processed/train.parquet",
+    "val": "artifacts/processed/val.parquet",
+    "test": "artifacts/processed/test.parquet",
+    "splits_meta": "artifacts/processed/splits.json"
+  }
+}

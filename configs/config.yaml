@@ -98,6 +98,11 @@ split:
   # test_end:  "2026-02-01"
 
   output_dir: "artifacts/processed"
+  out_dataset: "artifacts/processed/dataset_model1.parquet"
+  out_train: "artifacts/processed/train.parquet"
+  out_val: "artifacts/processed/val.parquet"
+  out_test: "artifacts/processed/test.parquet"
+  out_splits: "artifacts/processed/splits.json"
 
 # ------------------------------------------------------------
 # 5) MODEL 1 SETTINGS (Scanner)
