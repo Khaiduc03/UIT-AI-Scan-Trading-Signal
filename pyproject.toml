@@ -1,0 +1,20 @@
+[project]
+name = "AI-TRADING"
+version = "0.1.0"
+description = "AI-powered Bitcoin trading system"
+authors = [
+    { name = "khaimai" }
+]
+dependencies = [
+    "pyyaml",
+    "pandas",
+    "numpy",
+    "scikit-learn",
+    "ccxt",
+    "matplotlib",
+    "seaborn"
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"

@@ -1,0 +1,141 @@
+# configs/config.yaml
+# ============================================================
+# SINGLE SOURCE OF TRUTH (Nguồn cấu hình duy nhất)
+# - Tất cả scripts (download data, build features, build labels, train, test)
+#   đều đọc từ file này để tránh hardcode rải rác và lệch tham số.
+# - Quy tắc quan trọng: Features chỉ dùng dữ liệu <= thời điểm t (NO LOOKAHEAD).
+# ============================================================
+
+project:
+  name: "ai-first-btc"
+  version: "v1-model1-hotzone-scanner"
+  description: "Model 1 scanner: dự đoán vùng nóng (StrongMove) cho BTCUSDT 15m"
+
+# ------------------------------------------------------------
+# 1) DATA SETTINGS
+# ------------------------------------------------------------
+data:
+  symbol: "BTCUSDT" # Mã giao dịch (Binance/CCXT)
+  timeframe: "15m" # Khung nến chính
+  exchange: "binance" # Nguồn dữ liệu
+  market: "spot" # spot | futures (chốt spot để khỏi lệch data)
+  start_date: "2024-01-01" # YYYY-MM-DD
+  end_date: "2026-02-01" # YYYY-MM-DD
+  output_csv: "artifacts/raw/BTCUSDT_15m.csv"
+
+# ------------------------------------------------------------
+# 2) FEATURE SETTINGS (tính tại thời điểm t, KHÔNG dùng tương lai)
+# ------------------------------------------------------------
+features:
+  # ATR (Average True Range):
+  # Đo độ biến động trung bình của N cây nến gần nhất.
+  # Dùng cho:
+  # - Feature: atr14, atr_pct = atr14/close
+  # - Label: StrongMove = 1 nếu future_range >= a * ATR(t)
+  atr_period: 14
+
+  # vol_ratio:
+  # vol_ratio = volume / SMA(volume, vol_sma_period)
+  # So sánh volume hiện tại so với trung bình, giúp phát hiện "đột biến lực".
+  vol_sma_period: 50
+
+  # returns_periods:
+  # Tính return theo các chu kỳ: 1,3,6 nến
+  # Lưu ý: format return do returns_format quyết định (ratio vs percent)
+  returns_periods: [1, 3, 6]
+  returns_format: "ratio" # "ratio" (0.01=+1%) | "percent" (1=+1%)
+
+  # Swing High/Low (Pivot):
+  # swing_size=5 => pivot cần vượt 5 nến trước và 5 nến sau.
+  # Lưu ý: pivot có độ trễ xác nhận (delay) = swing_size nến.
+  swing_size: 5
+
+  # Warmup:
+  # Bỏ N nến đầu để indicators ổn định & tránh NaN/inf do thiếu dữ liệu.
+  warmup_bars: 300
+
+  # Nhóm feature bật/tắt
+  enable:
+    core: true # atr, returns, range, vol_ratio...
+    structure: true # swings + dist_to_swingHigh/Low
+    liquidity: false # v1 OFF: EQH/EQL/FVG/OB (để v2)
+
+# ------------------------------------------------------------
+# 3) LABEL SETTINGS (dùng tương lai t+1..t+K, KHÔNG leak vào features)
+# ------------------------------------------------------------
+label:
+  # Horizon (K): nhìn tương lai K nến để gán nhãn.
+  # K=12 nến 15m ≈ 3 giờ.
+  horizon_k: 12
+
+  # StrongMove:
+  # future_range = max(high[t+1..t+K]) - min(low[t+1..t+K])
+  # StrongMove = 1 nếu future_range >= strongmove_atr_mult * ATR(t)
+  strongmove_atr_mult: 2.5
+
+  # Optional: nhãn phá cấu trúc (v2 bật)
+  enable_breakstructure: false
+
+# ------------------------------------------------------------
+# 4) SPLIT SETTINGS (bắt buộc time-based, KHÔNG shuffle)
+# ------------------------------------------------------------
+split:
+  # time_ratio: chia theo tỷ lệ theo thời gian (data đã sort theo time tăng dần)
+  # time_dates: chia theo mốc ngày cụ thể
+  method: "time_ratio" # "time_ratio" | "time_dates"
+
+  # Nếu time_ratio: tổng 3 tỷ lệ phải = 1.0
+  train_ratio: 0.70
+  val_ratio: 0.15
+  test_ratio: 0.15
+
+  # Nếu time_dates: bật method=time_dates và dùng các mốc sau:
+  # train_end: "2025-06-30"
+  # val_end:   "2025-10-31"
+  # test_end:  "2026-02-01"
+
+  output_dir: "artifacts/processed"
+
+# ------------------------------------------------------------
+# 5) MODEL 1 SETTINGS (Scanner)
+# ------------------------------------------------------------
+model1:
+  # Task: dự đoán xác suất P(StrongMove=1)
+  task: "binary_classification"
+  target_col: "StrongMove"
+
+  # v1: baseline dễ debug
+  type: "logreg" # "logreg" | "xgboost" | "lightgbm"
+  class_weight: "balanced" # xử lý mất cân bằng (sóng mạnh thường ít)
+
+  feature_set: "all" # "core" | "structure" | "all"
+  output_path: "artifacts/models/model1.pkl"
+
+# ------------------------------------------------------------
+# 6) SCANNER / HOT ZONE EXTRACTION SETTINGS (offline test)
+# ------------------------------------------------------------
+scanner:
+  # zoneRisk: model output 0..1 (xác suất StrongMove)
+  risk_col: "zoneRisk"
+
+  # hot_threshold: tô vùng nóng khi zoneRisk >= threshold
+  hot_threshold: 0.75
+
+  # report nhiều threshold để xem trade-off coverage vs hit-rate
+  report_thresholds: [0.60, 0.70, 0.75, 0.80]
+
+  # Gộp zone: tối thiểu N nến liên tiếp mới tính là "zone" hợp lệ
+  min_zone_bars: 2
+
+  out_zoneRisk_test: "artifacts/reports/zoneRisk_test.parquet"
+  out_threshold_report: "artifacts/reports/scanner_threshold_report.json"
+  out_hotzones: "artifacts/reports/hotzones_test.json"
+  out_leakage_report: "artifacts/reports/leakage_checks.md"
+
+# ------------------------------------------------------------
+# 7) REPRODUCIBILITY / RUN SETTINGS
+# ------------------------------------------------------------
+run:
+  seed: 42 # reproducible
+  timezone: "UTC" # chuẩn hóa time
+  log_level: "INFO"
