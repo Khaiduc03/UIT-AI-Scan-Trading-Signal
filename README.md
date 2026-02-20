@@ -70,6 +70,37 @@ Outputs:
 - `artifacts/models/model1.pkl`
 - `artifacts/reports/model1_metrics.json`
 
+## Run scanner offline report (Phase 6 Prompt 1)
+
+```bash
+source .venv/bin/activate
+python src/evaluation/run_scanner_report.py
+```
+
+Outputs:
+- `artifacts/reports/zoneRisk_test.parquet`
+- `artifacts/reports/scanner_threshold_report.json`
+
+## Run hotzone extraction (Phase 6 Prompt 2)
+
+```bash
+source .venv/bin/activate
+python src/evaluation/extract_hotzones.py
+```
+
+Outputs:
+- `artifacts/reports/hotzones_test.json`
+
+## Run leakage sanity checks (Phase 6 Prompt 3)
+
+```bash
+source .venv/bin/activate
+python src/evaluation/leakage_checks_phase6.py
+```
+
+Outputs:
+- `artifacts/reports/leakage_checks.md`
+
 ## Project Rules
 
 - Rules document: `PROJECT_RULES.md`
@@ -94,6 +125,9 @@ make run-labels     # build phase-3 StrongMove labels
 make run-dataset    # build phase-4 dataset + time split
 make run-dataset-checks # check split consistency, class balance, drift
 make run-train-model1 # train phase-5 baseline model + metrics report
+make run-scanner-report # phase-6 prompt 1: zoneRisk + threshold report
+make run-hotzones # phase-6 prompt 2: hotzone extraction
+make run-leakage-checks # phase-6 prompt 3: leakage + artifact sanity checks
 ```
 
 ## Command meanings
@@ -105,6 +139,9 @@ make run-train-model1 # train phase-5 baseline model + metrics report
 - `make run-dataset`: ghép features + labels và chia train/val/test theo thời gian.
 - `make run-dataset-checks`: kiểm tra integrity split, class balance, drift.
 - `make run-train-model1`: train baseline logreg và ghi model/metrics của Phase 5.
+- `make run-scanner-report`: tạo zoneRisk trên test + threshold quality report (>= threshold).
+- `make run-hotzones`: trích xuất hot zones từ zoneRisk với `max_gap_bars`.
+- `make run-leakage-checks`: sinh `leakage_checks.md` và kiểm tra chéo artifacts Phase 6.
 
 ## Project Structure
 

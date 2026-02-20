@@ -28,6 +28,9 @@
 - Build phase-4 dataset split: `make run-dataset`
 - Run post-split checks: `make run-dataset-checks`
 - Train phase-5 baseline model: `make run-train-model1`
+- Build phase-6 scanner report: `make run-scanner-report`
+- Build phase-6 hotzones: `make run-hotzones`
+- Run phase-6 leakage checks: `make run-leakage-checks`
 
 ## 5) No-lookahead rule
 - Any feature at time `t` must not use data from `t+1` onward.

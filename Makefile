@@ -1,7 +1,7 @@
 PYTHON := .venv/bin/python
 PIP := .venv/bin/pip
 
-.PHONY: setup dev lock check lint format test run-download run-validate run-features run-labels run-dataset run-dataset-checks run-train-model1 clean
+.PHONY: setup dev lock check lint format test run-download run-validate run-features run-labels run-dataset run-dataset-checks run-train-model1 run-scanner-report run-hotzones run-leakage-checks clean
 
 setup:
 	python3 -m venv .venv
@@ -53,6 +53,18 @@ run-dataset-checks:
 run-train-model1:
 	@echo "[run-train-model1] Train Phase 5 baseline model and export model + metrics artifacts."
 	$(PYTHON) src/models/train_model1.py
+
+run-scanner-report:
+	@echo "[run-scanner-report] Build Phase 6 zoneRisk series + threshold quality report."
+	$(PYTHON) src/evaluation/run_scanner_report.py
+
+run-hotzones:
+	@echo "[run-hotzones] Extract Phase 6 hot zones with gap-aware grouping."
+	$(PYTHON) src/evaluation/extract_hotzones.py
+
+run-leakage-checks:
+	@echo "[run-leakage-checks] Run Phase 6 leakage and cross-artifact sanity checks."
+	$(PYTHON) src/evaluation/leakage_checks_phase6.py
 
 clean:
 	find . -type d -name "__pycache__" -prune -exec rm -rf {} +

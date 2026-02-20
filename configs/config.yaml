@@ -146,6 +146,7 @@ scanner:
 
   # Gộp zone: tối thiểu N nến liên tiếp mới tính là "zone" hợp lệ
   min_zone_bars: 2
+  max_gap_bars: 1
 
   out_zoneRisk_test: "artifacts/reports/zoneRisk_test.parquet"
   out_threshold_report: "artifacts/reports/scanner_threshold_report.json"

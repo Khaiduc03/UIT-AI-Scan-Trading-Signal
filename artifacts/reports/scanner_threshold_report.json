@@ -1,0 +1,69 @@
+{
+  "timeframe": "15m",
+  "timeframe_minutes": 15,
+  "horizon_k": 12,
+  "base_rate_test": 0.7149263292761051,
+  "baseline_definition": "lift_vs_base uses base positive rate on test set",
+  "thresholds": [
+    {
+      "threshold": 0.6,
+      "flagged_bars": 4040,
+      "coverage": 0.36972636588267593,
+      "tp": 3439,
+      "fp": 601,
+      "tn": 2514,
+      "fn": 4373,
+      "hit_rate": 0.8512376237623762,
+      "lift_vs_base": 1.1906648124489867,
+      "precision": 0.8512376237623762,
+      "recall": 0.44022017409114184,
+      "f1": 0.5803239959500506,
+      "hit_within_k_rate": 0.9732673267326732
+    },
+    {
+      "threshold": 0.7,
+      "flagged_bars": 1218,
+      "coverage": 0.11146700832799487,
+      "tp": 1090,
+      "fp": 128,
+      "tn": 2987,
+      "fn": 6722,
+      "hit_rate": 0.8949096880131363,
+      "lift_vs_base": 1.2517509166563672,
+      "precision": 0.8949096880131363,
+      "recall": 0.1395289298515105,
+      "f1": 0.24141749723145073,
+      "hit_within_k_rate": 0.964696223316913
+    },
+    {
+      "threshold": 0.75,
+      "flagged_bars": 646,
+      "coverage": 0.05911961197034868,
+      "tp": 584,
+      "fp": 62,
+      "tn": 3053,
+      "fn": 7228,
+      "hit_rate": 0.9040247678018576,
+      "lift_vs_base": 1.2645005936726699,
+      "precision": 0.9040247678018576,
+      "recall": 0.07475678443420379,
+      "f1": 0.1380941120832348,
+      "hit_within_k_rate": 0.9535603715170279
+    },
+    {
+      "threshold": 0.8,
+      "flagged_bars": 342,
+      "coverage": 0.031298618101949296,
+      "tp": 319,
+      "fp": 23,
+      "tn": 3092,
+      "fn": 7493,
+      "hit_rate": 0.9327485380116959,
+      "lift_vs_base": 1.3046778385629545,
+      "precision": 0.9327485380116959,
+      "recall": 0.040834613415258576,
+      "f1": 0.07824380672062792,
+      "hit_within_k_rate": 0.9502923976608187
+    }
+  ]
+}
