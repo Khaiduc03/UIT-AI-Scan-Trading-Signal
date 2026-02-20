@@ -27,6 +27,7 @@
 - Build phase-3 labels: `make run-labels`
 - Build phase-4 dataset split: `make run-dataset`
 - Run post-split checks: `make run-dataset-checks`
+- Train phase-5 baseline model: `make run-train-model1`
 
 ## 5) No-lookahead rule
 - Any feature at time `t` must not use data from `t+1` onward.

@@ -59,6 +59,17 @@ Outputs:
 - `artifacts/processed/test.parquet`
 - `artifacts/processed/splits.json`
 
+## Run model training (Phase 5)
+
+```bash
+source .venv/bin/activate
+python src/models/train_model1.py
+```
+
+Outputs:
+- `artifacts/models/model1.pkl`
+- `artifacts/reports/model1_metrics.json`
+
 ## Project Rules
 
 - Rules document: `PROJECT_RULES.md`
@@ -82,7 +93,18 @@ make run-features   # build phase-2 features
 make run-labels     # build phase-3 StrongMove labels
 make run-dataset    # build phase-4 dataset + time split
 make run-dataset-checks # check split consistency, class balance, drift
+make run-train-model1 # train phase-5 baseline model + metrics report
 ```
+
+## Command meanings
+
+- `make run-download`: tải dữ liệu BTCUSDT 15m vào `artifacts/raw/`.
+- `make run-validate`: kiểm tra chất lượng dữ liệu raw và ghi report.
+- `make run-features`: tạo features Phase 2 (`features_core`, `features_structure`).
+- `make run-labels`: tạo label StrongMove + report phân phối nhãn.
+- `make run-dataset`: ghép features + labels và chia train/val/test theo thời gian.
+- `make run-dataset-checks`: kiểm tra integrity split, class balance, drift.
+- `make run-train-model1`: train baseline logreg và ghi model/metrics của Phase 5.
 
 ## Project Structure
 
