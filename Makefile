@@ -3,7 +3,7 @@ PIP := .venv/bin/pip
 MAKEFLAGS += --no-print-directory
 .SILENT:
 
-.PHONY: setup dev lock check lint format test run-download run-validate run-features run-labels run-dataset run-dataset-checks run-train-model1 run-scanner-report run-hotzones run-leakage-checks run-scanner-tuning-summary run-all-phases summary-features summary-labels summary-dataset summary-train summary-scanner summary-hotzones summary-leakage clean
+.PHONY: setup dev lock check lint format test run-download run-validate run-features run-labels run-dataset run-dataset-checks run-train-model1 run-scanner-report run-hotzones run-leakage-checks run-scanner-tuning-summary run-export-hotzones-ui run-export-zonerisk-points run-phase8-ui run-all-phases summary-features summary-labels summary-dataset summary-train summary-scanner summary-hotzones summary-leakage clean
 
 setup:
 	python3 -m venv .venv
@@ -92,6 +92,19 @@ run-leakage-checks:
 run-scanner-tuning-summary:
 	@echo "[run-scanner-tuning-summary] Build Phase 7 scanner tuning freeze summary."
 	$(PYTHON) src/evaluation/write_scanner_tuning_summary.py
+
+run-export-hotzones-ui:
+	@echo "[run-export-hotzones-ui] Export Phase 8 hotzones UI rectangles."
+	$(PYTHON) src/evaluation/export_hotzones_ui.py
+
+run-export-zonerisk-points:
+	@echo "[run-export-zonerisk-points] Export Phase 8 zoneRisk overlay points."
+	$(PYTHON) src/evaluation/export_zoneRisk_points.py
+
+run-phase8-ui:
+	@echo "[run-phase8-ui] Build all Phase 8 UI artifacts."
+	$(MAKE) run-export-hotzones-ui
+	$(MAKE) run-export-zonerisk-points
 
 run-all-phases:
 	@echo ""

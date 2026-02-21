@@ -101,6 +101,37 @@ python src/evaluation/write_scanner_tuning_summary.py
 Outputs:
 - `artifacts/reports/scanner_tuning_summary.json`
 
+## Export hotzones for UI rectangles (Phase 8)
+
+```bash
+source .venv/bin/activate
+python src/evaluation/export_hotzones_ui.py
+```
+
+Outputs:
+- `artifacts/reports/hotzones_ui.json`
+
+Schema (top-level):
+- `timeframe`
+- `params` (`hot_threshold`, `min_zone_bars`, `max_gap_bars`)
+- `test_range` (`start_time`, `end_time`, `rows`)
+- `total_zones`
+- `zones`
+
+FE rendering notes:
+- Draw zone rectangle with `x=[from_time,to_time]`, `y=[bottom_price,top_price]`.
+- Optionally show `zone_id` and `max_risk` as label.
+
+## Export zoneRisk overlay points (Phase 8, optional)
+
+```bash
+source .venv/bin/activate
+python src/evaluation/export_zoneRisk_points.py
+```
+
+Outputs:
+- `artifacts/reports/zoneRisk_points.json`
+
 ## Run leakage sanity checks (Phase 6 Prompt 3)
 
 ```bash
@@ -139,6 +170,9 @@ make run-scanner-report # phase-6 prompt 1: zoneRisk + threshold report
 make run-hotzones # phase-6 prompt 2: hotzone extraction
 make run-leakage-checks # phase-6 prompt 3: leakage + artifact sanity checks
 make run-scanner-tuning-summary # phase-7: scanner tuning freeze summary
+make run-export-hotzones-ui # phase-8: hotzones UI rectangles export
+make run-export-zonerisk-points # phase-8: zoneRisk overlay points export
+make run-phase8-ui # phase-8 convenience target (run both exports)
 make run-all-phases # run full pipeline phase 1 -> phase 6
 ```
 
@@ -157,6 +191,9 @@ make run-all-phases # run full pipeline phase 1 -> phase 6
 - `make run-hotzones`: trích xuất hot zones từ zoneRisk với `max_gap_bars`.
 - `make run-leakage-checks`: sinh `leakage_checks.md` và kiểm tra chéo artifacts Phase 6.
 - `make run-scanner-tuning-summary`: tổng hợp báo cáo tuning scanner để freeze cấu hình cho v1.
+- `make run-export-hotzones-ui`: export dữ liệu zone rectangle cho FE.
+- `make run-export-zonerisk-points`: export chuỗi time + zoneRisk để overlay chart.
+- `make run-phase8-ui`: chạy cả 2 export Phase 8.
 
 ## Scanner Freeze (v1)
 

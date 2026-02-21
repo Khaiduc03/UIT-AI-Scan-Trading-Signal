@@ -32,6 +32,9 @@
 - Build phase-6 hotzones: `make run-hotzones`
 - Run phase-6 leakage checks: `make run-leakage-checks`
 - Build phase-7 scanner tuning summary: `make run-scanner-tuning-summary`
+- Export phase-8 hotzones UI rectangles: `make run-export-hotzones-ui`
+- Export phase-8 zoneRisk points: `make run-export-zonerisk-points`
+- Run all phase-8 exports: `make run-phase8-ui`
 
 ## 5) No-lookahead rule
 - Any feature at time `t` must not use data from `t+1` onward.
@@ -43,9 +46,20 @@
 - Label outputs in `artifacts/processed/` and `artifacts/reports/` are generated artifacts.
 - Re-generate artifacts from scripts, do not hand-edit them.
 - Phase 7 tuning summary artifact: `artifacts/reports/scanner_tuning_summary.json`.
+- Phase 8 UI artifacts:
+- `artifacts/reports/hotzones_ui.json`
+- `artifacts/reports/zoneRisk_points.json`
 
 ## 7) Scanner freeze (v1)
 - `hot_threshold=0.80`
 - `min_zone_bars=2`
 - `max_gap_bars=1`
 - `report_thresholds=[0.60, 0.70, 0.75, 0.80, 0.85, 0.90]`
+
+## 8) FE export contract (Phase 8)
+- Hotzone rectangle contract:
+- `from_time/to_time` for x-axis bounds.
+- `bottom_price/top_price` for y-axis bounds.
+- Keep time as ISO UTC string.
+- zoneRisk overlay contract:
+- points list of `{time, zoneRisk}` with `zoneRisk` in `[0,1]`.

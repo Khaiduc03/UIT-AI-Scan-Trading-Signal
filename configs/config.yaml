@@ -173,6 +173,8 @@ scanner:
   out_hotzones: "artifacts/reports/hotzones_test.json"
   out_leakage_report: "artifacts/reports/leakage_checks.md"
   out_tuning_summary: "artifacts/reports/scanner_tuning_summary.json"
+  out_hotzones_ui: "artifacts/reports/hotzones_ui.json"
+  out_zoneRisk_points: "artifacts/reports/zoneRisk_points.json"
 
 # ------------------------------------------------------------
 # 7) REPRODUCIBILITY / RUN SETTINGS
