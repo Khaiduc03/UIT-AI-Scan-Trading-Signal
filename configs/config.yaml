@@ -159,7 +159,7 @@ scanner:
   risk_col: "zoneRisk"
 
   # hot_threshold: tô vùng nóng khi zoneRisk >= threshold
-  hot_threshold: 0.80
+  hot_threshold: 0.75
 
   # report nhiều threshold để xem trade-off coverage vs hit-rate
   report_thresholds: [0.60, 0.70, 0.75, 0.80, 0.85, 0.90]

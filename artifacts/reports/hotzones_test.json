@@ -1,20 +1,20 @@
 {
-  "hot_threshold": 0.8,
+  "hot_threshold": 0.75,
   "min_zone_bars": 2,
   "max_gap_bars": 1,
-  "total_zones": 65,
-  "total_hot_bars": 342,
+  "total_zones": 141,
+  "total_hot_bars": 646,
   "zones": [
     {
       "zone_id": 1,
-      "from_time": "2025-10-10T13:30:00Z",
+      "from_time": "2025-10-10T13:15:00Z",
       "to_time": "2025-10-10T13:45:00Z",
-      "from_index": 48,
+      "from_index": 47,
       "to_index": 49,
       "max_risk": 0.8912877345665478,
-      "avg_risk": 0.8879648942453431,
-      "count_hot_bars": 2,
-      "count_bars_total": 2
+      "avg_risk": 0.8511987402969194,
+      "count_hot_bars": 3,
+      "count_bars_total": 3
     },
     {
       "zone_id": 2,
@@ -40,6 +40,17 @@
     },
     {
       "zone_id": 4,
+      "from_time": "2025-10-11T19:00:00Z",
+      "to_time": "2025-10-11T19:15:00Z",
+      "from_index": 166,
+      "to_index": 167,
+      "max_risk": 0.8046701143246311,
+      "avg_risk": 0.7818765263497843,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 5,
       "from_time": "2025-10-12T14:45:00Z",
       "to_time": "2025-10-12T15:00:00Z",
       "from_index": 245,
@@ -50,7 +61,7 @@
       "count_bars_total": 2
     },
     {
-      "zone_id": 5,
+      "zone_id": 6,
       "from_time": "2025-10-13T11:00:00Z",
       "to_time": "2025-10-13T11:15:00Z",
       "from_index": 326,
@@ -61,18 +72,51 @@
       "count_bars_total": 2
     },
     {
-      "zone_id": 6,
-      "from_time": "2025-10-17T06:15:00Z",
-      "to_time": "2025-10-17T07:30:00Z",
-      "from_index": 691,
-      "to_index": 696,
-      "max_risk": 0.9473176336759591,
-      "avg_risk": 0.834634398061408,
-      "count_hot_bars": 5,
-      "count_bars_total": 6
+      "zone_id": 7,
+      "from_time": "2025-10-14T04:45:00Z",
+      "to_time": "2025-10-14T05:30:00Z",
+      "from_index": 397,
+      "to_index": 400,
+      "max_risk": 0.7924808115081515,
+      "avg_risk": 0.7454279488384515,
+      "count_hot_bars": 3,
+      "count_bars_total": 4
     },
     {
-      "zone_id": 7,
+      "zone_id": 8,
+      "from_time": "2025-10-15T13:30:00Z",
+      "to_time": "2025-10-15T13:45:00Z",
+      "from_index": 528,
+      "to_index": 529,
+      "max_risk": 0.811098728812092,
+      "avg_risk": 0.8044653523757228,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 9,
+      "from_time": "2025-10-17T06:15:00Z",
+      "to_time": "2025-10-17T08:15:00Z",
+      "from_index": 691,
+      "to_index": 699,
+      "max_risk": 0.9473176336759591,
+      "avg_risk": 0.8173807047804627,
+      "count_hot_bars": 7,
+      "count_bars_total": 9
+    },
+    {
+      "zone_id": 10,
+      "from_time": "2025-10-19T00:00:00Z",
+      "to_time": "2025-10-19T00:30:00Z",
+      "from_index": 858,
+      "to_index": 860,
+      "max_risk": 0.7663574460062528,
+      "avg_risk": 0.7292902474317753,
+      "count_hot_bars": 2,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 11,
       "from_time": "2025-10-19T08:15:00Z",
       "to_time": "2025-10-19T09:45:00Z",
       "from_index": 891,
@@ -83,51 +127,95 @@
       "count_bars_total": 7
     },
     {
-      "zone_id": 8,
+      "zone_id": 12,
       "from_time": "2025-10-20T00:00:00Z",
-      "to_time": "2025-10-20T00:15:00Z",
+      "to_time": "2025-10-20T00:30:00Z",
       "from_index": 954,
-      "to_index": 955,
+      "to_index": 956,
       "max_risk": 0.8173554274047543,
-      "avg_risk": 0.8155862340738042,
-      "count_hot_bars": 2,
-      "count_bars_total": 2
+      "avg_risk": 0.8005852827743739,
+      "count_hot_bars": 3,
+      "count_bars_total": 3
     },
     {
-      "zone_id": 9,
+      "zone_id": 13,
       "from_time": "2025-10-26T09:15:00Z",
-      "to_time": "2025-10-26T09:30:00Z",
+      "to_time": "2025-10-26T09:45:00Z",
       "from_index": 1567,
-      "to_index": 1568,
+      "to_index": 1569,
       "max_risk": 0.9866758682488684,
-      "avg_risk": 0.9574091034351939,
-      "count_hot_bars": 2,
-      "count_bars_total": 2
+      "avg_risk": 0.9015242194982441,
+      "count_hot_bars": 3,
+      "count_bars_total": 3
     },
     {
-      "zone_id": 10,
-      "from_time": "2025-10-27T06:45:00Z",
-      "to_time": "2025-10-27T07:00:00Z",
-      "from_index": 1653,
-      "to_index": 1654,
+      "zone_id": 14,
+      "from_time": "2025-10-26T11:30:00Z",
+      "to_time": "2025-10-26T12:00:00Z",
+      "from_index": 1576,
+      "to_index": 1578,
+      "max_risk": 0.8531747412921337,
+      "avg_risk": 0.7919490154018597,
+      "count_hot_bars": 2,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 15,
+      "from_time": "2025-10-26T21:15:00Z",
+      "to_time": "2025-10-26T22:00:00Z",
+      "from_index": 1615,
+      "to_index": 1618,
+      "max_risk": 0.994182867908435,
+      "avg_risk": 0.7919225942151642,
+      "count_hot_bars": 3,
+      "count_bars_total": 4
+    },
+    {
+      "zone_id": 16,
+      "from_time": "2025-10-27T06:15:00Z",
+      "to_time": "2025-10-27T07:30:00Z",
+      "from_index": 1651,
+      "to_index": 1656,
       "max_risk": 0.8527982304341857,
-      "avg_risk": 0.8467236949021366,
-      "count_hot_bars": 2,
-      "count_bars_total": 2
+      "avg_risk": 0.7746336852580852,
+      "count_hot_bars": 4,
+      "count_bars_total": 6
     },
     {
-      "zone_id": 11,
-      "from_time": "2025-10-28T14:30:00Z",
+      "zone_id": 17,
+      "from_time": "2025-10-27T13:30:00Z",
+      "to_time": "2025-10-27T14:00:00Z",
+      "from_index": 1680,
+      "to_index": 1682,
+      "max_risk": 0.8614079027000012,
+      "avg_risk": 0.7878857359665469,
+      "count_hot_bars": 2,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 18,
+      "from_time": "2025-10-28T13:15:00Z",
       "to_time": "2025-10-28T14:45:00Z",
-      "from_index": 1780,
+      "from_index": 1775,
       "to_index": 1781,
       "max_risk": 0.938573638922994,
-      "avg_risk": 0.890985685247504,
-      "count_hot_bars": 2,
-      "count_bars_total": 2
+      "avg_risk": 0.7994196902763316,
+      "count_hot_bars": 6,
+      "count_bars_total": 7
     },
     {
-      "zone_id": 12,
+      "zone_id": 19,
+      "from_time": "2025-10-29T18:00:00Z",
+      "to_time": "2025-10-29T18:30:00Z",
+      "from_index": 1890,
+      "to_index": 1892,
+      "max_risk": 0.9944946094606656,
+      "avg_risk": 0.7296232755280784,
+      "count_hot_bars": 2,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 20,
       "from_time": "2025-10-30T04:00:00Z",
       "to_time": "2025-10-30T04:30:00Z",
       "from_index": 1930,
@@ -138,18 +226,18 @@
       "count_bars_total": 3
     },
     {
-      "zone_id": 13,
+      "zone_id": 21,
       "from_time": "2025-11-02T04:00:00Z",
-      "to_time": "2025-11-02T05:00:00Z",
+      "to_time": "2025-11-02T05:45:00Z",
       "from_index": 2218,
-      "to_index": 2222,
+      "to_index": 2225,
       "max_risk": 0.9114592772085575,
-      "avg_risk": 0.8568058005799515,
-      "count_hot_bars": 5,
-      "count_bars_total": 5
+      "avg_risk": 0.8294277524853603,
+      "count_hot_bars": 8,
+      "count_bars_total": 8
     },
     {
-      "zone_id": 14,
+      "zone_id": 22,
       "from_time": "2025-11-02T22:30:00Z",
       "to_time": "2025-11-02T23:00:00Z",
       "from_index": 2292,
@@ -160,7 +248,7 @@
       "count_bars_total": 3
     },
     {
-      "zone_id": 15,
+      "zone_id": 23,
       "from_time": "2025-11-03T15:15:00Z",
       "to_time": "2025-11-03T15:30:00Z",
       "from_index": 2359,
@@ -171,7 +259,7 @@
       "count_bars_total": 2
     },
     {
-      "zone_id": 16,
+      "zone_id": 24,
       "from_time": "2025-11-04T05:15:00Z",
       "to_time": "2025-11-04T05:45:00Z",
       "from_index": 2415,
@@ -182,18 +270,40 @@
       "count_bars_total": 3
     },
     {
-      "zone_id": 17,
-      "from_time": "2025-11-09T14:15:00Z",
-      "to_time": "2025-11-09T14:30:00Z",
-      "from_index": 2931,
-      "to_index": 2932,
-      "max_risk": 0.91577816517361,
-      "avg_risk": 0.9003522437925184,
+      "zone_id": 25,
+      "from_time": "2025-11-07T11:00:00Z",
+      "to_time": "2025-11-07T11:15:00Z",
+      "from_index": 2726,
+      "to_index": 2727,
+      "max_risk": 0.7958918122793781,
+      "avg_risk": 0.7856105950052277,
       "count_hot_bars": 2,
       "count_bars_total": 2
     },
     {
-      "zone_id": 18,
+      "zone_id": 26,
+      "from_time": "2025-11-08T11:30:00Z",
+      "to_time": "2025-11-08T11:45:00Z",
+      "from_index": 2824,
+      "to_index": 2825,
+      "max_risk": 0.7685368659663787,
+      "avg_risk": 0.7639250753571047,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 27,
+      "from_time": "2025-11-09T14:00:00Z",
+      "to_time": "2025-11-09T14:30:00Z",
+      "from_index": 2930,
+      "to_index": 2932,
+      "max_risk": 0.91577816517361,
+      "avg_risk": 0.8562533972138118,
+      "count_hot_bars": 3,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 28,
       "from_time": "2025-11-10T14:30:00Z",
       "to_time": "2025-11-10T15:00:00Z",
       "from_index": 3028,
@@ -204,7 +314,7 @@
       "count_bars_total": 3
     },
     {
-      "zone_id": 19,
+      "zone_id": 29,
       "from_time": "2025-11-11T12:45:00Z",
       "to_time": "2025-11-11T13:15:00Z",
       "from_index": 3117,
@@ -215,7 +325,29 @@
       "count_bars_total": 3
     },
     {
-      "zone_id": 20,
+      "zone_id": 30,
+      "from_time": "2025-11-12T07:45:00Z",
+      "to_time": "2025-11-12T09:00:00Z",
+      "from_index": 3193,
+      "to_index": 3198,
+      "max_risk": 0.8103816699848126,
+      "avg_risk": 0.7317733263853751,
+      "count_hot_bars": 4,
+      "count_bars_total": 6
+    },
+    {
+      "zone_id": 31,
+      "from_time": "2025-11-12T15:30:00Z",
+      "to_time": "2025-11-12T16:00:00Z",
+      "from_index": 3224,
+      "to_index": 3226,
+      "max_risk": 0.8426384008420363,
+      "avg_risk": 0.8040109050651588,
+      "count_hot_bars": 3,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 32,
       "from_time": "2025-11-13T14:30:00Z",
       "to_time": "2025-11-13T14:45:00Z",
       "from_index": 3316,
@@ -226,18 +358,40 @@
       "count_bars_total": 2
     },
     {
-      "zone_id": 21,
+      "zone_id": 33,
+      "from_time": "2025-11-16T11:00:00Z",
+      "to_time": "2025-11-16T11:15:00Z",
+      "from_index": 3590,
+      "to_index": 3591,
+      "max_risk": 0.7868161559048774,
+      "avg_risk": 0.7853278147763035,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 34,
       "from_time": "2025-11-16T15:45:00Z",
       "to_time": "2025-11-16T16:15:00Z",
       "from_index": 3609,
       "to_index": 3611,
       "max_risk": 0.9333731926965615,
       "avg_risk": 0.8473477093724123,
-      "count_hot_bars": 2,
+      "count_hot_bars": 3,
       "count_bars_total": 3
     },
     {
-      "zone_id": 22,
+      "zone_id": 35,
+      "from_time": "2025-11-17T13:00:00Z",
+      "to_time": "2025-11-17T13:45:00Z",
+      "from_index": 3694,
+      "to_index": 3697,
+      "max_risk": 0.8507072006577466,
+      "avg_risk": 0.787573938258277,
+      "count_hot_bars": 4,
+      "count_bars_total": 4
+    },
+    {
+      "zone_id": 36,
       "from_time": "2025-11-19T15:15:00Z",
       "to_time": "2025-11-19T15:45:00Z",
       "from_index": 3895,
@@ -248,7 +402,7 @@
       "count_bars_total": 3
     },
     {
-      "zone_id": 23,
+      "zone_id": 37,
       "from_time": "2025-11-20T13:30:00Z",
       "to_time": "2025-11-20T14:00:00Z",
       "from_index": 3984,
@@ -259,29 +413,62 @@
       "count_bars_total": 3
     },
     {
-      "zone_id": 24,
-      "from_time": "2025-11-30T08:15:00Z",
-      "to_time": "2025-11-30T09:00:00Z",
-      "from_index": 4923,
-      "to_index": 4926,
-      "max_risk": 0.9402473899148105,
-      "avg_risk": 0.8521232163993454,
-      "count_hot_bars": 3,
-      "count_bars_total": 4
+      "zone_id": 38,
+      "from_time": "2025-11-26T14:30:00Z",
+      "to_time": "2025-11-26T14:45:00Z",
+      "from_index": 4564,
+      "to_index": 4565,
+      "max_risk": 0.7804046689638293,
+      "avg_risk": 0.7745139482529297,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
     },
     {
-      "zone_id": 25,
-      "from_time": "2025-12-01T00:00:00Z",
+      "zone_id": 39,
+      "from_time": "2025-11-29T06:15:00Z",
+      "to_time": "2025-11-29T06:30:00Z",
+      "from_index": 4819,
+      "to_index": 4820,
+      "max_risk": 0.864025866427273,
+      "avg_risk": 0.8140210731596369,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 40,
+      "from_time": "2025-11-29T17:00:00Z",
+      "to_time": "2025-11-29T17:15:00Z",
+      "from_index": 4862,
+      "to_index": 4863,
+      "max_risk": 0.8194286768558604,
+      "avg_risk": 0.7942892088413656,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 41,
+      "from_time": "2025-11-30T08:15:00Z",
+      "to_time": "2025-11-30T09:15:00Z",
+      "from_index": 4923,
+      "to_index": 4927,
+      "max_risk": 0.9402473899148105,
+      "avg_risk": 0.8373657229648181,
+      "count_hot_bars": 4,
+      "count_bars_total": 5
+    },
+    {
+      "zone_id": 42,
+      "from_time": "2025-11-30T23:45:00Z",
       "to_time": "2025-12-01T00:45:00Z",
-      "from_index": 4986,
+      "from_index": 4985,
       "to_index": 4989,
       "max_risk": 0.9909198388629429,
-      "avg_risk": 0.9034861842774927,
-      "count_hot_bars": 4,
-      "count_bars_total": 4
+      "avg_risk": 0.8768037325949848,
+      "count_hot_bars": 5,
+      "count_bars_total": 5
     },
     {
-      "zone_id": 26,
+      "zone_id": 43,
       "from_time": "2025-12-03T14:00:00Z",
       "to_time": "2025-12-03T14:30:00Z",
       "from_index": 5234,
@@ -292,7 +479,7 @@
       "count_bars_total": 3
     },
     {
-      "zone_id": 27,
+      "zone_id": 44,
       "from_time": "2025-12-05T09:15:00Z",
       "to_time": "2025-12-05T09:30:00Z",
       "from_index": 5407,
@@ -303,7 +490,18 @@
       "count_bars_total": 2
     },
     {
-      "zone_id": 28,
+      "zone_id": 45,
+      "from_time": "2025-12-05T13:15:00Z",
+      "to_time": "2025-12-05T13:30:00Z",
+      "from_index": 5423,
+      "to_index": 5424,
+      "max_risk": 0.8376022318184289,
+      "avg_risk": 0.8076873490402356,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 46,
       "from_time": "2025-12-05T14:30:00Z",
       "to_time": "2025-12-05T15:00:00Z",
       "from_index": 5428,
@@ -314,7 +512,29 @@
       "count_bars_total": 3
     },
     {
-      "zone_id": 29,
+      "zone_id": 47,
+      "from_time": "2025-12-06T14:15:00Z",
+      "to_time": "2025-12-06T15:15:00Z",
+      "from_index": 5523,
+      "to_index": 5527,
+      "max_risk": 0.9250781186378427,
+      "avg_risk": 0.7761184650696555,
+      "count_hot_bars": 3,
+      "count_bars_total": 5
+    },
+    {
+      "zone_id": 48,
+      "from_time": "2025-12-06T19:00:00Z",
+      "to_time": "2025-12-06T19:30:00Z",
+      "from_index": 5542,
+      "to_index": 5544,
+      "max_risk": 0.8512773752233617,
+      "avg_risk": 0.7435928852546453,
+      "count_hot_bars": 2,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 49,
       "from_time": "2025-12-07T14:15:00Z",
       "to_time": "2025-12-07T15:00:00Z",
       "from_index": 5619,
@@ -325,18 +545,62 @@
       "count_bars_total": 4
     },
     {
-      "zone_id": 30,
-      "from_time": "2025-12-09T15:00:00Z",
-      "to_time": "2025-12-09T15:45:00Z",
-      "from_index": 5814,
-      "to_index": 5817,
-      "max_risk": 0.8821270572962493,
-      "avg_risk": 0.7878714417471435,
-      "count_hot_bars": 3,
-      "count_bars_total": 4
+      "zone_id": 50,
+      "from_time": "2025-12-07T21:45:00Z",
+      "to_time": "2025-12-07T22:00:00Z",
+      "from_index": 5649,
+      "to_index": 5650,
+      "max_risk": 0.9196282321919353,
+      "avg_risk": 0.8516453508667704,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
     },
     {
-      "zone_id": 31,
+      "zone_id": 51,
+      "from_time": "2025-12-08T14:30:00Z",
+      "to_time": "2025-12-08T15:00:00Z",
+      "from_index": 5716,
+      "to_index": 5718,
+      "max_risk": 0.8801049902084082,
+      "avg_risk": 0.8056429538081277,
+      "count_hot_bars": 3,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 52,
+      "from_time": "2025-12-09T14:30:00Z",
+      "to_time": "2025-12-09T15:45:00Z",
+      "from_index": 5812,
+      "to_index": 5817,
+      "max_risk": 0.8821270572962493,
+      "avg_risk": 0.7519044581174095,
+      "count_hot_bars": 4,
+      "count_bars_total": 6
+    },
+    {
+      "zone_id": 53,
+      "from_time": "2025-12-10T09:45:00Z",
+      "to_time": "2025-12-10T10:15:00Z",
+      "from_index": 5889,
+      "to_index": 5891,
+      "max_risk": 0.8061551556605192,
+      "avg_risk": 0.782074045159954,
+      "count_hot_bars": 3,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 54,
+      "from_time": "2025-12-10T18:30:00Z",
+      "to_time": "2025-12-10T19:00:00Z",
+      "from_index": 5924,
+      "to_index": 5926,
+      "max_risk": 0.9560187874052807,
+      "avg_risk": 0.7864948150939693,
+      "count_hot_bars": 2,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 55,
       "from_time": "2025-12-11T14:30:00Z",
       "to_time": "2025-12-11T14:45:00Z",
       "from_index": 6004,
@@ -347,29 +611,106 @@
       "count_bars_total": 2
     },
     {
-      "zone_id": 32,
-      "from_time": "2025-12-12T15:15:00Z",
+      "zone_id": 56,
+      "from_time": "2025-12-12T14:30:00Z",
       "to_time": "2025-12-12T15:45:00Z",
-      "from_index": 6103,
+      "from_index": 6100,
       "to_index": 6105,
       "max_risk": 0.9636644900604969,
-      "avg_risk": 0.9157477892538722,
+      "avg_risk": 0.8569280152714548,
+      "count_hot_bars": 6,
+      "count_bars_total": 6
+    },
+    {
+      "zone_id": 57,
+      "from_time": "2025-12-13T10:30:00Z",
+      "to_time": "2025-12-13T10:45:00Z",
+      "from_index": 6180,
+      "to_index": 6181,
+      "max_risk": 0.8160851305715837,
+      "avg_risk": 0.8048914998319991,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 58,
+      "from_time": "2025-12-13T11:30:00Z",
+      "to_time": "2025-12-13T12:00:00Z",
+      "from_index": 6184,
+      "to_index": 6186,
+      "max_risk": 0.8621490198243078,
+      "avg_risk": 0.8041249250395808,
       "count_hot_bars": 3,
       "count_bars_total": 3
     },
     {
-      "zone_id": 33,
+      "zone_id": 59,
+      "from_time": "2025-12-13T12:45:00Z",
+      "to_time": "2025-12-13T13:00:00Z",
+      "from_index": 6189,
+      "to_index": 6190,
+      "max_risk": 0.7671184339975713,
+      "avg_risk": 0.7589248160904416,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 60,
+      "from_time": "2025-12-13T14:15:00Z",
+      "to_time": "2025-12-13T14:30:00Z",
+      "from_index": 6195,
+      "to_index": 6196,
+      "max_risk": 0.8561331365290498,
+      "avg_risk": 0.8165370481481654,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 61,
+      "from_time": "2025-12-14T06:15:00Z",
+      "to_time": "2025-12-14T06:30:00Z",
+      "from_index": 6259,
+      "to_index": 6260,
+      "max_risk": 0.7597666290609193,
+      "avg_risk": 0.7588129393987237,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 62,
+      "from_time": "2025-12-14T09:30:00Z",
+      "to_time": "2025-12-14T10:15:00Z",
+      "from_index": 6272,
+      "to_index": 6275,
+      "max_risk": 0.874269286535223,
+      "avg_risk": 0.784313666795132,
+      "count_hot_bars": 3,
+      "count_bars_total": 4
+    },
+    {
+      "zone_id": 63,
       "from_time": "2025-12-14T11:00:00Z",
       "to_time": "2025-12-14T11:45:00Z",
       "from_index": 6278,
       "to_index": 6281,
       "max_risk": 0.9878666765381764,
       "avg_risk": 0.8856913241207325,
-      "count_hot_bars": 3,
+      "count_hot_bars": 4,
       "count_bars_total": 4
     },
     {
-      "zone_id": 34,
+      "zone_id": 64,
+      "from_time": "2025-12-14T22:30:00Z",
+      "to_time": "2025-12-14T23:30:00Z",
+      "from_index": 6324,
+      "to_index": 6328,
+      "max_risk": 0.8009554102748547,
+      "avg_risk": 0.7023785090674296,
+      "count_hot_bars": 3,
+      "count_bars_total": 5
+    },
+    {
+      "zone_id": 65,
       "from_time": "2025-12-15T14:30:00Z",
       "to_time": "2025-12-15T15:15:00Z",
       "from_index": 6388,
@@ -380,7 +721,18 @@
       "count_bars_total": 4
     },
     {
-      "zone_id": 35,
+      "zone_id": 66,
+      "from_time": "2025-12-17T14:45:00Z",
+      "to_time": "2025-12-17T15:00:00Z",
+      "from_index": 6581,
+      "to_index": 6582,
+      "max_risk": 0.9903569230078454,
+      "avg_risk": 0.8837115436672988,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 67,
       "from_time": "2025-12-18T13:00:00Z",
       "to_time": "2025-12-18T14:30:00Z",
       "from_index": 6670,
@@ -391,29 +743,62 @@
       "count_bars_total": 7
     },
     {
-      "zone_id": 36,
-      "from_time": "2025-12-21T08:30:00Z",
-      "to_time": "2025-12-21T08:45:00Z",
-      "from_index": 6940,
-      "to_index": 6941,
-      "max_risk": 0.9036625626065121,
-      "avg_risk": 0.8569205412654359,
+      "zone_id": 68,
+      "from_time": "2025-12-19T03:00:00Z",
+      "to_time": "2025-12-19T03:15:00Z",
+      "from_index": 6726,
+      "to_index": 6727,
+      "max_risk": 0.7736199848642158,
+      "avg_risk": 0.7626284682856206,
       "count_hot_bars": 2,
       "count_bars_total": 2
     },
     {
-      "zone_id": 37,
-      "from_time": "2025-12-21T13:30:00Z",
-      "to_time": "2025-12-21T14:00:00Z",
-      "from_index": 6960,
-      "to_index": 6962,
-      "max_risk": 0.9172031656683484,
-      "avg_risk": 0.8361319692916699,
+      "zone_id": 69,
+      "from_time": "2025-12-20T13:00:00Z",
+      "to_time": "2025-12-20T13:15:00Z",
+      "from_index": 6862,
+      "to_index": 6863,
+      "max_risk": 0.8957253299583633,
+      "avg_risk": 0.8369644384024595,
       "count_hot_bars": 2,
-      "count_bars_total": 3
+      "count_bars_total": 2
     },
     {
-      "zone_id": 38,
+      "zone_id": 70,
+      "from_time": "2025-12-21T01:30:00Z",
+      "to_time": "2025-12-21T02:45:00Z",
+      "from_index": 6912,
+      "to_index": 6917,
+      "max_risk": 0.8227928296244184,
+      "avg_risk": 0.7674354150067929,
+      "count_hot_bars": 5,
+      "count_bars_total": 6
+    },
+    {
+      "zone_id": 71,
+      "from_time": "2025-12-21T08:30:00Z",
+      "to_time": "2025-12-21T09:45:00Z",
+      "from_index": 6940,
+      "to_index": 6945,
+      "max_risk": 0.9036625626065121,
+      "avg_risk": 0.7989495838195415,
+      "count_hot_bars": 5,
+      "count_bars_total": 6
+    },
+    {
+      "zone_id": 72,
+      "from_time": "2025-12-21T13:00:00Z",
+      "to_time": "2025-12-21T14:00:00Z",
+      "from_index": 6958,
+      "to_index": 6962,
+      "max_risk": 0.9172031656683484,
+      "avg_risk": 0.7978161418977618,
+      "count_hot_bars": 4,
+      "count_bars_total": 5
+    },
+    {
+      "zone_id": 73,
       "from_time": "2025-12-22T00:00:00Z",
       "to_time": "2025-12-22T00:15:00Z",
       "from_index": 7002,
@@ -424,7 +809,51 @@
       "count_bars_total": 2
     },
     {
-      "zone_id": 39,
+      "zone_id": 74,
+      "from_time": "2025-12-22T08:15:00Z",
+      "to_time": "2025-12-22T08:45:00Z",
+      "from_index": 7035,
+      "to_index": 7037,
+      "max_risk": 0.8403599061839854,
+      "avg_risk": 0.7677551462959231,
+      "count_hot_bars": 2,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 75,
+      "from_time": "2025-12-23T14:30:00Z",
+      "to_time": "2025-12-23T14:45:00Z",
+      "from_index": 7156,
+      "to_index": 7157,
+      "max_risk": 0.9268844235390327,
+      "avg_risk": 0.8527514870126713,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 76,
+      "from_time": "2025-12-24T14:30:00Z",
+      "to_time": "2025-12-24T14:45:00Z",
+      "from_index": 7252,
+      "to_index": 7253,
+      "max_risk": 0.9407119633620686,
+      "avg_risk": 0.8470888174797111,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 77,
+      "from_time": "2025-12-25T08:15:00Z",
+      "to_time": "2025-12-25T08:45:00Z",
+      "from_index": 7323,
+      "to_index": 7325,
+      "max_risk": 0.9012592371639061,
+      "avg_risk": 0.8037918168190834,
+      "count_hot_bars": 3,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 78,
       "from_time": "2025-12-25T15:15:00Z",
       "to_time": "2025-12-25T15:45:00Z",
       "from_index": 7351,
@@ -435,29 +864,95 @@
       "count_bars_total": 3
     },
     {
-      "zone_id": 40,
-      "from_time": "2025-12-26T14:30:00Z",
-      "to_time": "2025-12-26T15:15:00Z",
-      "from_index": 7444,
-      "to_index": 7447,
-      "max_risk": 0.9615820362377135,
-      "avg_risk": 0.8913282885901406,
-      "count_hot_bars": 4,
-      "count_bars_total": 4
-    },
-    {
-      "zone_id": 41,
-      "from_time": "2025-12-27T22:00:00Z",
-      "to_time": "2025-12-27T22:15:00Z",
-      "from_index": 7570,
-      "to_index": 7571,
-      "max_risk": 0.8902862316166239,
-      "avg_risk": 0.8476731803647832,
+      "zone_id": 79,
+      "from_time": "2025-12-25T23:30:00Z",
+      "to_time": "2025-12-25T23:45:00Z",
+      "from_index": 7384,
+      "to_index": 7385,
+      "max_risk": 0.8179030705812272,
+      "avg_risk": 0.7902302976575691,
       "count_hot_bars": 2,
       "count_bars_total": 2
     },
     {
-      "zone_id": 42,
+      "zone_id": 80,
+      "from_time": "2025-12-26T07:30:00Z",
+      "to_time": "2025-12-26T07:45:00Z",
+      "from_index": 7416,
+      "to_index": 7417,
+      "max_risk": 0.8561046065416801,
+      "avg_risk": 0.8249576081331269,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 81,
+      "from_time": "2025-12-26T14:30:00Z",
+      "to_time": "2025-12-26T15:30:00Z",
+      "from_index": 7444,
+      "to_index": 7448,
+      "max_risk": 0.9615820362377135,
+      "avg_risk": 0.8638302141794634,
+      "count_hot_bars": 5,
+      "count_bars_total": 5
+    },
+    {
+      "zone_id": 82,
+      "from_time": "2025-12-27T09:15:00Z",
+      "to_time": "2025-12-27T09:30:00Z",
+      "from_index": 7519,
+      "to_index": 7520,
+      "max_risk": 0.8453623514007705,
+      "avg_risk": 0.819252787755655,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 83,
+      "from_time": "2025-12-27T22:00:00Z",
+      "to_time": "2025-12-27T22:45:00Z",
+      "from_index": 7570,
+      "to_index": 7573,
+      "max_risk": 0.8902862316166239,
+      "avg_risk": 0.8019686468587398,
+      "count_hot_bars": 4,
+      "count_bars_total": 4
+    },
+    {
+      "zone_id": 84,
+      "from_time": "2025-12-28T14:30:00Z",
+      "to_time": "2025-12-28T15:00:00Z",
+      "from_index": 7636,
+      "to_index": 7638,
+      "max_risk": 0.7657684864253153,
+      "avg_risk": 0.7573952114253736,
+      "count_hot_bars": 3,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 85,
+      "from_time": "2025-12-28T15:45:00Z",
+      "to_time": "2025-12-28T16:15:00Z",
+      "from_index": 7641,
+      "to_index": 7643,
+      "max_risk": 0.7562575776339145,
+      "avg_risk": 0.734081231433125,
+      "count_hot_bars": 2,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 86,
+      "from_time": "2025-12-28T18:00:00Z",
+      "to_time": "2025-12-28T18:45:00Z",
+      "from_index": 7650,
+      "to_index": 7653,
+      "max_risk": 0.8548776710528411,
+      "avg_risk": 0.7699015314724013,
+      "count_hot_bars": 3,
+      "count_bars_total": 4
+    },
+    {
+      "zone_id": 87,
       "from_time": "2025-12-28T22:45:00Z",
       "to_time": "2025-12-28T23:00:00Z",
       "from_index": 7669,
@@ -468,7 +963,18 @@
       "count_bars_total": 2
     },
     {
-      "zone_id": 43,
+      "zone_id": 88,
+      "from_time": "2025-12-29T00:30:00Z",
+      "to_time": "2025-12-29T00:45:00Z",
+      "from_index": 7676,
+      "to_index": 7677,
+      "max_risk": 0.8104024099535273,
+      "avg_risk": 0.7813104609801981,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 89,
       "from_time": "2025-12-30T08:00:00Z",
       "to_time": "2025-12-30T08:15:00Z",
       "from_index": 7802,
@@ -479,62 +985,117 @@
       "count_bars_total": 2
     },
     {
-      "zone_id": 44,
-      "from_time": "2025-12-30T14:45:00Z",
+      "zone_id": 90,
+      "from_time": "2025-12-30T14:15:00Z",
       "to_time": "2025-12-30T15:00:00Z",
-      "from_index": 7829,
+      "from_index": 7827,
       "to_index": 7830,
       "max_risk": 0.9383445417951947,
-      "avg_risk": 0.8888565186385928,
-      "count_hot_bars": 2,
-      "count_bars_total": 2
-    },
-    {
-      "zone_id": 45,
-      "from_time": "2025-12-31T14:30:00Z",
-      "to_time": "2025-12-31T15:00:00Z",
-      "from_index": 7924,
-      "to_index": 7926,
-      "max_risk": 0.8666395605263766,
-      "avg_risk": 0.8474015366361716,
-      "count_hot_bars": 3,
-      "count_bars_total": 3
-    },
-    {
-      "zone_id": 46,
-      "from_time": "2026-01-02T10:00:00Z",
-      "to_time": "2026-01-02T10:15:00Z",
-      "from_index": 8098,
-      "to_index": 8099,
-      "max_risk": 0.8740607306348096,
-      "avg_risk": 0.8373772459889048,
-      "count_hot_bars": 2,
-      "count_bars_total": 2
-    },
-    {
-      "zone_id": 47,
-      "from_time": "2026-01-02T14:15:00Z",
-      "to_time": "2026-01-02T14:45:00Z",
-      "from_index": 8115,
-      "to_index": 8117,
-      "max_risk": 0.9223354016640133,
-      "avg_risk": 0.8827113062521227,
-      "count_hot_bars": 3,
-      "count_bars_total": 3
-    },
-    {
-      "zone_id": 48,
-      "from_time": "2026-01-05T00:45:00Z",
-      "to_time": "2026-01-05T01:30:00Z",
-      "from_index": 8349,
-      "to_index": 8352,
-      "max_risk": 0.8638072955041461,
-      "avg_risk": 0.7840999011548901,
-      "count_hot_bars": 3,
+      "avg_risk": 0.829548975735549,
+      "count_hot_bars": 4,
       "count_bars_total": 4
     },
     {
-      "zone_id": 49,
+      "zone_id": 91,
+      "from_time": "2025-12-31T14:00:00Z",
+      "to_time": "2025-12-31T15:00:00Z",
+      "from_index": 7922,
+      "to_index": 7926,
+      "max_risk": 0.8666395605263766,
+      "avg_risk": 0.7947557861622802,
+      "count_hot_bars": 4,
+      "count_bars_total": 5
+    },
+    {
+      "zone_id": 92,
+      "from_time": "2026-01-01T17:15:00Z",
+      "to_time": "2026-01-01T17:45:00Z",
+      "from_index": 8031,
+      "to_index": 8033,
+      "max_risk": 0.8174680432202864,
+      "avg_risk": 0.7782911214533388,
+      "count_hot_bars": 3,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 93,
+      "from_time": "2026-01-01T23:00:00Z",
+      "to_time": "2026-01-01T23:15:00Z",
+      "from_index": 8054,
+      "to_index": 8055,
+      "max_risk": 0.7924984627703635,
+      "avg_risk": 0.7788012195771583,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 94,
+      "from_time": "2026-01-02T09:45:00Z",
+      "to_time": "2026-01-02T10:15:00Z",
+      "from_index": 8097,
+      "to_index": 8099,
+      "max_risk": 0.8740607306348096,
+      "avg_risk": 0.8233666719207822,
+      "count_hot_bars": 3,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 95,
+      "from_time": "2026-01-02T14:15:00Z",
+      "to_time": "2026-01-02T15:00:00Z",
+      "from_index": 8115,
+      "to_index": 8118,
+      "max_risk": 0.9223354016640133,
+      "avg_risk": 0.8544887928447318,
+      "count_hot_bars": 4,
+      "count_bars_total": 4
+    },
+    {
+      "zone_id": 96,
+      "from_time": "2026-01-03T07:15:00Z",
+      "to_time": "2026-01-03T07:30:00Z",
+      "from_index": 8183,
+      "to_index": 8184,
+      "max_risk": 0.8671796394687847,
+      "avg_risk": 0.8156040644055983,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 97,
+      "from_time": "2026-01-03T22:15:00Z",
+      "to_time": "2026-01-03T22:45:00Z",
+      "from_index": 8243,
+      "to_index": 8245,
+      "max_risk": 0.7666590734850418,
+      "avg_risk": 0.7583635159526079,
+      "count_hot_bars": 3,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 98,
+      "from_time": "2026-01-04T00:00:00Z",
+      "to_time": "2026-01-04T00:15:00Z",
+      "from_index": 8250,
+      "to_index": 8251,
+      "max_risk": 0.9908038408054367,
+      "avg_risk": 0.8814535540744374,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 99,
+      "from_time": "2026-01-05T00:00:00Z",
+      "to_time": "2026-01-05T01:30:00Z",
+      "from_index": 8346,
+      "to_index": 8352,
+      "max_risk": 0.9714987943044332,
+      "avg_risk": 0.802449333161112,
+      "count_hot_bars": 5,
+      "count_bars_total": 7
+    },
+    {
+      "zone_id": 100,
       "from_time": "2026-01-05T14:30:00Z",
       "to_time": "2026-01-05T14:45:00Z",
       "from_index": 8404,
@@ -545,29 +1106,73 @@
       "count_bars_total": 2
     },
     {
-      "zone_id": 50,
+      "zone_id": 101,
       "from_time": "2026-01-06T14:00:00Z",
       "to_time": "2026-01-06T14:45:00Z",
       "from_index": 8498,
       "to_index": 8501,
       "max_risk": 0.8580451949691109,
       "avg_risk": 0.8339038890347529,
-      "count_hot_bars": 3,
+      "count_hot_bars": 4,
       "count_bars_total": 4
     },
     {
-      "zone_id": 51,
-      "from_time": "2026-01-09T07:45:00Z",
-      "to_time": "2026-01-09T08:00:00Z",
-      "from_index": 8761,
-      "to_index": 8762,
-      "max_risk": 0.8538050776061377,
-      "avg_risk": 0.8479639873014536,
+      "zone_id": 102,
+      "from_time": "2026-01-07T09:00:00Z",
+      "to_time": "2026-01-07T09:30:00Z",
+      "from_index": 8574,
+      "to_index": 8576,
+      "max_risk": 0.843640011931352,
+      "avg_risk": 0.8057468727373586,
+      "count_hot_bars": 3,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 103,
+      "from_time": "2026-01-07T14:00:00Z",
+      "to_time": "2026-01-07T15:15:00Z",
+      "from_index": 8594,
+      "to_index": 8599,
+      "max_risk": 0.8895585665781707,
+      "avg_risk": 0.7688533508514731,
+      "count_hot_bars": 4,
+      "count_bars_total": 6
+    },
+    {
+      "zone_id": 104,
+      "from_time": "2026-01-08T06:45:00Z",
+      "to_time": "2026-01-08T07:00:00Z",
+      "from_index": 8661,
+      "to_index": 8662,
+      "max_risk": 0.8094218654011951,
+      "avg_risk": 0.7954466097985594,
       "count_hot_bars": 2,
       "count_bars_total": 2
     },
     {
-      "zone_id": 52,
+      "zone_id": 105,
+      "from_time": "2026-01-08T14:30:00Z",
+      "to_time": "2026-01-08T14:45:00Z",
+      "from_index": 8692,
+      "to_index": 8693,
+      "max_risk": 0.7860657275326811,
+      "avg_risk": 0.7805341616860467,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 106,
+      "from_time": "2026-01-09T07:45:00Z",
+      "to_time": "2026-01-09T08:45:00Z",
+      "from_index": 8761,
+      "to_index": 8765,
+      "max_risk": 0.9176074642335699,
+      "avg_risk": 0.820463089445812,
+      "count_hot_bars": 4,
+      "count_bars_total": 5
+    },
+    {
+      "zone_id": 107,
       "from_time": "2026-01-09T15:15:00Z",
       "to_time": "2026-01-09T15:30:00Z",
       "from_index": 8791,
@@ -578,7 +1183,84 @@
       "count_bars_total": 2
     },
     {
-      "zone_id": 53,
+      "zone_id": 108,
+      "from_time": "2026-01-10T17:45:00Z",
+      "to_time": "2026-01-10T18:00:00Z",
+      "from_index": 8897,
+      "to_index": 8898,
+      "max_risk": 0.7847622388855886,
+      "avg_risk": 0.7788550028593059,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 109,
+      "from_time": "2026-01-11T03:45:00Z",
+      "to_time": "2026-01-11T04:00:00Z",
+      "from_index": 8937,
+      "to_index": 8938,
+      "max_risk": 0.7879673779831238,
+      "avg_risk": 0.7760261028073921,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 110,
+      "from_time": "2026-01-11T05:45:00Z",
+      "to_time": "2026-01-11T06:15:00Z",
+      "from_index": 8945,
+      "to_index": 8947,
+      "max_risk": 0.8617183161759122,
+      "avg_risk": 0.7823813034688115,
+      "count_hot_bars": 2,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 111,
+      "from_time": "2026-01-11T08:00:00Z",
+      "to_time": "2026-01-11T08:45:00Z",
+      "from_index": 8954,
+      "to_index": 8957,
+      "max_risk": 0.7806964119426789,
+      "avg_risk": 0.7553800219261075,
+      "count_hot_bars": 3,
+      "count_bars_total": 4
+    },
+    {
+      "zone_id": 112,
+      "from_time": "2026-01-11T12:45:00Z",
+      "to_time": "2026-01-11T13:15:00Z",
+      "from_index": 8973,
+      "to_index": 8975,
+      "max_risk": 0.8156206077519683,
+      "avg_risk": 0.7727214069026594,
+      "count_hot_bars": 2,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 113,
+      "from_time": "2026-01-11T14:45:00Z",
+      "to_time": "2026-01-11T15:30:00Z",
+      "from_index": 8981,
+      "to_index": 8984,
+      "max_risk": 0.8536727997612286,
+      "avg_risk": 0.7817353878048939,
+      "count_hot_bars": 3,
+      "count_bars_total": 4
+    },
+    {
+      "zone_id": 114,
+      "from_time": "2026-01-11T23:00:00Z",
+      "to_time": "2026-01-11T23:15:00Z",
+      "from_index": 9014,
+      "to_index": 9015,
+      "max_risk": 0.8617917588624985,
+      "avg_risk": 0.8118998393984216,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 115,
       "from_time": "2026-01-12T14:15:00Z",
       "to_time": "2026-01-12T14:30:00Z",
       "from_index": 9075,
@@ -589,18 +1271,29 @@
       "count_bars_total": 2
     },
     {
-      "zone_id": 54,
-      "from_time": "2026-01-14T14:30:00Z",
-      "to_time": "2026-01-14T15:00:00Z",
-      "from_index": 9268,
-      "to_index": 9270,
-      "max_risk": 0.9311091819818228,
-      "avg_risk": 0.8817955472492969,
-      "count_hot_bars": 3,
-      "count_bars_total": 3
+      "zone_id": 116,
+      "from_time": "2026-01-13T09:15:00Z",
+      "to_time": "2026-01-13T09:30:00Z",
+      "from_index": 9151,
+      "to_index": 9152,
+      "max_risk": 0.8137594267176866,
+      "avg_risk": 0.7857887446238225,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
     },
     {
-      "zone_id": 55,
+      "zone_id": 117,
+      "from_time": "2026-01-14T14:00:00Z",
+      "to_time": "2026-01-14T15:00:00Z",
+      "from_index": 9266,
+      "to_index": 9270,
+      "max_risk": 0.9311091819818228,
+      "avg_risk": 0.8267237721191956,
+      "count_hot_bars": 4,
+      "count_bars_total": 5
+    },
+    {
+      "zone_id": 118,
       "from_time": "2026-01-15T14:30:00Z",
       "to_time": "2026-01-15T14:45:00Z",
       "from_index": 9364,
@@ -611,18 +1304,62 @@
       "count_bars_total": 2
     },
     {
-      "zone_id": 56,
-      "from_time": "2026-01-17T15:00:00Z",
-      "to_time": "2026-01-17T15:45:00Z",
-      "from_index": 9558,
-      "to_index": 9561,
-      "max_risk": 0.8757673208912411,
-      "avg_risk": 0.8435367526284061,
+      "zone_id": 119,
+      "from_time": "2026-01-16T14:30:00Z",
+      "to_time": "2026-01-16T15:30:00Z",
+      "from_index": 9460,
+      "to_index": 9464,
+      "max_risk": 0.9072548362829381,
+      "avg_risk": 0.8050677127142756,
       "count_hot_bars": 4,
+      "count_bars_total": 5
+    },
+    {
+      "zone_id": 120,
+      "from_time": "2026-01-17T14:15:00Z",
+      "to_time": "2026-01-17T16:15:00Z",
+      "from_index": 9555,
+      "to_index": 9563,
+      "max_risk": 0.8757673208912411,
+      "avg_risk": 0.7905380128568018,
+      "count_hot_bars": 7,
+      "count_bars_total": 9
+    },
+    {
+      "zone_id": 121,
+      "from_time": "2026-01-17T22:00:00Z",
+      "to_time": "2026-01-17T22:45:00Z",
+      "from_index": 9586,
+      "to_index": 9589,
+      "max_risk": 0.771412433234494,
+      "avg_risk": 0.7603252486901437,
+      "count_hot_bars": 3,
       "count_bars_total": 4
     },
     {
-      "zone_id": 57,
+      "zone_id": 122,
+      "from_time": "2026-01-18T13:00:00Z",
+      "to_time": "2026-01-18T13:30:00Z",
+      "from_index": 9646,
+      "to_index": 9648,
+      "max_risk": 0.8074408868017227,
+      "avg_risk": 0.7790568653856745,
+      "count_hot_bars": 3,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 123,
+      "from_time": "2026-01-18T14:15:00Z",
+      "to_time": "2026-01-18T14:45:00Z",
+      "from_index": 9651,
+      "to_index": 9653,
+      "max_risk": 0.8547340894998808,
+      "avg_risk": 0.796839036327373,
+      "count_hot_bars": 3,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 124,
       "from_time": "2026-01-18T23:00:00Z",
       "to_time": "2026-01-19T00:15:00Z",
       "from_index": 9686,
@@ -633,7 +1370,29 @@
       "count_bars_total": 6
     },
     {
-      "zone_id": 58,
+      "zone_id": 125,
+      "from_time": "2026-01-19T23:00:00Z",
+      "to_time": "2026-01-19T23:15:00Z",
+      "from_index": 9782,
+      "to_index": 9783,
+      "max_risk": 0.8924882769714373,
+      "avg_risk": 0.8326785448409968,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 126,
+      "from_time": "2026-01-20T05:00:00Z",
+      "to_time": "2026-01-20T05:15:00Z",
+      "from_index": 9806,
+      "to_index": 9807,
+      "max_risk": 0.9559086818371447,
+      "avg_risk": 0.8637179999778871,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 127,
       "from_time": "2026-01-20T14:30:00Z",
       "to_time": "2026-01-20T15:00:00Z",
       "from_index": 9844,
@@ -644,7 +1403,7 @@
       "count_bars_total": 3
     },
     {
-      "zone_id": 59,
+      "zone_id": 128,
       "from_time": "2026-01-21T11:45:00Z",
       "to_time": "2026-01-21T12:00:00Z",
       "from_index": 9929,
@@ -655,7 +1414,18 @@
       "count_bars_total": 2
     },
     {
-      "zone_id": 60,
+      "zone_id": 129,
+      "from_time": "2026-01-22T13:30:00Z",
+      "to_time": "2026-01-22T13:45:00Z",
+      "from_index": 10032,
+      "to_index": 10033,
+      "max_risk": 0.9384792209021396,
+      "avg_risk": 0.8527630448595099,
+      "count_hot_bars": 2,
+      "count_bars_total": 2
+    },
+    {
+      "zone_id": 130,
       "from_time": "2026-01-22T14:30:00Z",
       "to_time": "2026-01-22T15:15:00Z",
       "from_index": 10036,
@@ -666,7 +1436,7 @@
       "count_bars_total": 4
     },
     {
-      "zone_id": 61,
+      "zone_id": 131,
       "from_time": "2026-01-24T13:45:00Z",
       "to_time": "2026-01-24T14:00:00Z",
       "from_index": 10225,
@@ -677,29 +1447,73 @@
       "count_bars_total": 2
     },
     {
-      "zone_id": 62,
+      "zone_id": 132,
       "from_time": "2026-01-25T03:15:00Z",
-      "to_time": "2026-01-25T03:30:00Z",
+      "to_time": "2026-01-25T04:15:00Z",
       "from_index": 10279,
-      "to_index": 10280,
+      "to_index": 10283,
       "max_risk": 0.9064015239320652,
-      "avg_risk": 0.8579597341806007,
+      "avg_risk": 0.8023031423911038,
+      "count_hot_bars": 4,
+      "count_bars_total": 5
+    },
+    {
+      "zone_id": 133,
+      "from_time": "2026-01-25T06:00:00Z",
+      "to_time": "2026-01-25T06:15:00Z",
+      "from_index": 10290,
+      "to_index": 10291,
+      "max_risk": 0.9009045359368437,
+      "avg_risk": 0.8395431183026323,
       "count_hot_bars": 2,
       "count_bars_total": 2
     },
     {
-      "zone_id": 63,
-      "from_time": "2026-01-25T16:00:00Z",
-      "to_time": "2026-01-25T16:15:00Z",
-      "from_index": 10330,
-      "to_index": 10331,
+      "zone_id": 134,
+      "from_time": "2026-01-25T15:45:00Z",
+      "to_time": "2026-01-25T16:30:00Z",
+      "from_index": 10329,
+      "to_index": 10332,
       "max_risk": 0.9419276680690559,
-      "avg_risk": 0.9361146198051012,
+      "avg_risk": 0.8493492824187037,
+      "count_hot_bars": 4,
+      "count_bars_total": 4
+    },
+    {
+      "zone_id": 135,
+      "from_time": "2026-01-26T14:00:00Z",
+      "to_time": "2026-01-26T15:30:00Z",
+      "from_index": 10418,
+      "to_index": 10424,
+      "max_risk": 0.9330349105337622,
+      "avg_risk": 0.7718537726310387,
+      "count_hot_bars": 4,
+      "count_bars_total": 7
+    },
+    {
+      "zone_id": 136,
+      "from_time": "2026-01-27T14:30:00Z",
+      "to_time": "2026-01-27T15:00:00Z",
+      "from_index": 10516,
+      "to_index": 10518,
+      "max_risk": 0.831984219795934,
+      "avg_risk": 0.7605672799851217,
+      "count_hot_bars": 2,
+      "count_bars_total": 3
+    },
+    {
+      "zone_id": 137,
+      "from_time": "2026-01-29T08:00:00Z",
+      "to_time": "2026-01-29T08:15:00Z",
+      "from_index": 10682,
+      "to_index": 10683,
+      "max_risk": 0.787018335881483,
+      "avg_risk": 0.7729251511248829,
       "count_hot_bars": 2,
       "count_bars_total": 2
     },
     {
-      "zone_id": 64,
+      "zone_id": 138,
       "from_time": "2026-01-29T14:30:00Z",
       "to_time": "2026-01-29T15:30:00Z",
       "from_index": 10708,
@@ -710,15 +1524,37 @@
       "count_bars_total": 5
     },
     {
-      "zone_id": 65,
-      "from_time": "2026-01-31T14:15:00Z",
-      "to_time": "2026-01-31T14:30:00Z",
-      "from_index": 10899,
-      "to_index": 10900,
-      "max_risk": 0.9822491955538913,
-      "avg_risk": 0.9608648907558102,
+      "zone_id": 139,
+      "from_time": "2026-01-30T01:15:00Z",
+      "to_time": "2026-01-30T01:30:00Z",
+      "from_index": 10751,
+      "to_index": 10752,
+      "max_risk": 0.9967320589524972,
+      "avg_risk": 0.8970524872778659,
       "count_hot_bars": 2,
       "count_bars_total": 2
+    },
+    {
+      "zone_id": 140,
+      "from_time": "2026-01-31T07:30:00Z",
+      "to_time": "2026-01-31T08:30:00Z",
+      "from_index": 10872,
+      "to_index": 10876,
+      "max_risk": 0.8469977741852067,
+      "avg_risk": 0.7485900261900603,
+      "count_hot_bars": 3,
+      "count_bars_total": 5
+    },
+    {
+      "zone_id": 141,
+      "from_time": "2026-01-31T14:00:00Z",
+      "to_time": "2026-01-31T14:30:00Z",
+      "from_index": 10898,
+      "to_index": 10900,
+      "max_risk": 0.9822491955538913,
+      "avg_risk": 0.8941319006965109,
+      "count_hot_bars": 3,
+      "count_bars_total": 3
     }
   ]
 }
