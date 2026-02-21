@@ -8,7 +8,7 @@
 
 project:
   name: "ai-first-btc"
-  version: "v1-model1-hotzone-scanner"
+  version: "v1-model1-hotzone-scanner+v2-draft"
   description: "Model 1 scanner: dự đoán vùng nóng (StrongMove) cho BTCUSDT 15m"
 
 # ------------------------------------------------------------
@@ -81,6 +81,20 @@ label:
   out_breakstructure: "artifacts/processed/labels_breakstructure.parquet"
 
 # ------------------------------------------------------------
+# 3.1) LABEL2 SETTINGS (Model 2 - zone/anchor based)
+# ------------------------------------------------------------
+label2:
+  # Label2 cho Model 2 được gán tại anchor time t0 (thường là zone end).
+  # Dùng future window [t0+1 .. t0+K] để xác định hướng Long/Short/Neutral.
+  # CẢNH BÁO: dữ liệu future của label2 TUYỆT ĐỐI không được dùng để build features tại t0.
+  # anchor:
+  # - "bar": mỗi bar là 1 anchor (Model 2 chạy độc lập với Model 1)
+  # - "zone_end": anchor tại cuối zone (phụ thuộc zone mapping của Model 1/UI)
+  anchor: "bar"
+  horizon_k: 12
+  atr_mult: 1.5
+
+# ------------------------------------------------------------
 # 4) SPLIT SETTINGS (bắt buộc time-based, KHÔNG shuffle)
 # ------------------------------------------------------------
 split:
@@ -150,6 +164,48 @@ model1:
   # threshold_grid_fine: [0.60, 0.61, ..., 0.90]
   time_stability_chunks: 6
   calibration_bins: 10
+
+# ------------------------------------------------------------
+# 5.1) MODEL 2 SETTINGS (v2 - Trade Signal)
+# ------------------------------------------------------------
+model2:
+  # Toggle tổng cho pipeline v2:
+  # false = không auto-run model2 trong flow hiện tại, tránh ảnh hưởng Phase 1-8.
+  enabled: false
+
+  # Số nến quá khứ dùng để tạo feature cho mỗi anchor time t0.
+  context_window_l: 96
+
+  # Bài toán phân loại 3 lớp hướng giá tương lai.
+  task: "multiclass_classification"
+  classes: ["long", "short", "neutral"]
+  type: "multinomial_logreg"
+
+  # Context Model 1 là tùy chọn:
+  # Model2 vẫn chạy bình thường với base features nếu không có context Model1.
+  # Context chỉ là nhóm feature bổ sung khi được bật.
+  allow_model1_context: true
+  use_model1_context_default: false
+  enable_model1_context_features: false
+  context_features:
+    - zoneRisk
+    - zoneRisk_slope_recent
+    - zone_len_bars
+    - max_risk
+    - avg_risk
+
+  # Output paths cho artifact v2 (chuẩn style dự án).
+  out_dataset: "artifacts/processed/dataset_model2.parquet"
+  out_train: "artifacts/processed/model2_train.parquet"
+  out_val: "artifacts/processed/model2_val.parquet"
+  out_test: "artifacts/processed/model2_test.parquet"
+  out_splits: "artifacts/processed/model2_splits.json"
+  out_model_base: "artifacts/models/model2_base.pkl"
+  out_model_plus: "artifacts/models/model2_plus.pkl"
+  out_metrics: "artifacts/reports/model2_metrics.json"
+  out_ablation_report: "artifacts/reports/model2_ablation_report.json"
+  out_predictions_test: "artifacts/reports/model2_predictions_test.json"
+  out_zone_index_test: "artifacts/reports/model2_zone_index_test.json"
 
 # ------------------------------------------------------------
 # 6) SCANNER / HOT ZONE EXTRACTION SETTINGS (offline test)

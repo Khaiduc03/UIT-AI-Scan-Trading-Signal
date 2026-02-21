@@ -1,280 +1,240 @@
-```md
-# AI-First BTC 15m — Roadmap (Model 1: Hot Zone Scanner) — v1
+# AI-TRADING — Roadmap (BTCUSDT 15m) — v1 DONE + v2 (Model 2) NEXT
 
-> Scope v1: **CHỈ AI/DATA/TRAIN/TEST OFFLINE**.  
-> Không làm BE/FE trong version này.  
 > Market: **BTCUSDT**, timeframe: **15m**  
-> Label chuẩn: **K=12 nến (~3h)**, **a=2.5 \* ATR14**  
-> Output cuối v1: Model 1 trả **zoneRisk = P(StrongMove)** + report test + danh sách hot zones.
+> v1 label: **StrongMove** with **K=12 (~3h)**, **a=2.5 \* ATR14**  
+> v1 output: **zoneRisk = P(StrongMove)** + hotzones + UI demo export  
+> v2 goal: **User selects a zone → Model 2 returns Signal + Probabilities (+ optional Entry/SL/TP rule-based)** (offline first)
 
 ---
 
-## Phase 0 — Bootstrap repo & config
+## Global Current Settings
 
-### Goal
+### v1 (current)
 
-Dựng project từ số 0, có cấu trúc rõ ràng, config thống nhất.
+- `label.horizon_k = 12`
+- `label.strongmove_atr_mult = 2.5`
+- `features.atr_period = 14`
+- `scanner.hot_threshold = 0.75`
+- `scanner.min_zone_bars = 2`
+- `scanner.max_gap_bars = 1`
+- `scanner.report_thresholds = [0.60, 0.70, 0.75, 0.80, 0.85, 0.90]`
 
-### Tasks
+### v2 (new required UX behavior)
 
-- [x] 0.1 Create repo + folder structure
-- [x] 0.2 Add config file (single source of truth)
-- [x] 0.3 Add README quickstart + commands
-
-### Folder structure (required)
-```
-
-ai-first-btc/
-src/
-data/
-features/
-labels/
-models/
-evaluation/
-utils/
-configs/
-artifacts/
-raw/
-processed/
-models/
-reports/
-tests/
-README.md
-pyproject.toml (or requirements.txt)
-
-```
-
-### Config (required): `configs/config.yaml`
-Must include:
-- symbol: BTCUSDT
-- timeframe: 15m
-- K: 12
-- a: 2.5
-- atr_period: 14
-- train/val/test split (by date or ratio, but time-based)
-
-### Deliverables
-- `configs/config.yaml`
-- Repo structure created
-- `README.md` with run commands
-
-### Acceptance criteria
-- Running `python -m src` (or a simple entry command) prints config loaded successfully.
+- In UI “Predict” panel:
+  - `use_model1_context` (boolean)
+  - **default = false**
+- If `use_model1_context=false` → Model 2 uses ONLY its own candle-based/context features.
+- If `use_model1_context=true` → Model 2 additionally consumes Model 1 context (zoneRisk + zone stats) as extra features.
 
 ---
 
-## Phase 1 — Data ingestion (OHLCV 15m)
+# v1 — Model 1 Hot Zone Scanner (Phase 0 → Phase 8) ✅ DONE
 
-### Goal
-Tải dữ liệu BTCUSDT 15m và lưu “raw reproducible”.
-
-### Tasks
-- [x] 1.1 Download candles BTCUSDT 15m (≥ 6 months, ideally 1–2 years)
-- [x] 1.2 Data validation & data quality report
-
-### Requirements
-Raw columns:
-- `time, open, high, low, close, volume`
-Time must be monotonic increasing, no duplicates.
-
-### Deliverables
-- `artifacts/raw/BTCUSDT_15m.csv`
-- `artifacts/reports/data_quality.json`
-
-### Acceptance criteria
-- No duplicated `time`
-- No NaN in required columns
-- Candle count >= target (document in report)
+(unchanged)
 
 ---
 
-## Phase 2 — Feature engineering (no lookahead)
+# v2 — Model 2 Trade Signal (Offline First)
+
+## Phase 9 — Define Model 2 task + label set (zone-level)
 
 ### Goal
-Tạo features tại thời điểm **t** (chỉ dùng quá khứ/hiện tại).
 
-### Tasks
-- [x] 2.1 Core features (volatility, returns, volume)
-- [x] 2.2 Structure features (swings + distance to swings)
-- [x] 2.3 Merge features into one table
+Chốt rõ: Model 2 dự đoán gì khi user bấm **Predict**.
 
-### 2.1 Core features (minimum)
-Per bar:
-- `atr14`
-- `atr_pct = atr14 / close`
-- `range1 = high - low`
-- `ret1 = (close/close[-1] - 1)`
-- `ret3, ret6`
-- `abs_ret1`
-- `vol_sma50`
-- `vol_ratio = volume / vol_sma50`
+### Output contract (locked)
 
-### 2.2 Structure features (minimum)
-Use swing/pivot logic (Lux-style):
-- Detect swing highs/lows with a chosen `swing_size` (start with 5 for 15m)
+- `signal`: `Long | Short | Neutral`
+- `probabilities`: `p_long, p_short, p_neutral`
+- `confidence`: `max(probabilities)`
+- Optional (baseline rule-based first, NOT ML yet):
+  - `entry`, `stop_loss`, `take_profit`
+
+### Label baseline (locked: Option A)
+
+**3-class direction by future move** (zone_end anchored)
+
+For each sample at anchor time `t0` (zone end):
+
+- Lookahead window: `t0+1 .. t0+K2`
 - Compute:
-  - `last_swing_high`
-  - `last_swing_low`
-  - `dist_high_atr = (last_swing_high - close)/atr14`
-  - `dist_low_atr  = (close - last_swing_low)/atr14`
-  - `near_structure = min(dist_high_atr, dist_low_atr)`
+  - `up_move = max(high_future) - close[t0]`
+  - `down_move = close[t0] - min(low_future)`
+- Define:
+  - `Long` if `up_move >= b * ATR14(t0)` and `up_move > down_move`
+  - `Short` if `down_move >= b * ATR14(t0)` and `down_move > up_move`
+  - else `Neutral`
 
-> Note: pivot confirmation introduces delay = `swing_size`. Must be consistent.
+Params:
+
+- `K2`: default `12` (match v1), optional try `24` later
+- `b`: default `1.5` (tune later)
 
 ### Deliverables
-- `artifacts/processed/features_core.parquet`
-- `artifacts/processed/features_structure.parquet`
-- `artifacts/processed/features_all.parquet`
 
-### Acceptance criteria
-- Features table has same row count as raw minus initial warmup
-- No future leakage (features at t must not use any bar > t)
+- `docs/model2_label_spec.md`
+- Config add sections:
+  - `label2: { horizon_k2, atr_mult_b, neutral_rule }`
+  - `model2: { use_model1_context_default: false }`
+- `artifacts/reports/model2_label_distribution.json`
+
+### Acceptance
+
+- Labels computed without leakage into features
+- Class balance report exists
 
 ---
 
-## Phase 3 — Labeling (K=12, a=2.5*ATR14)
+## Phase 10 — Build Model 2 dataset (anchor-based, candle-only baseline)
 
 ### Goal
-Tạo label “StrongMove” dùng tương lai **t+1..t+12**.
 
-### Tasks
-- [x] 3.1 Label StrongMove
-- [ ] 3.2 (Optional) Label BreakStructure (Up/Down)
+Tạo **bar-level dataset** cho Model 2 (không phụ thuộc Model 1) để model có thể chạy ở mọi thời điểm.
 
-### 3.1 StrongMove label (required)
-For each bar t:
-- `future_range = max(high[t+1..t+K]) - min(low[t+1..t+K])`
-- `StrongMove = 1 if future_range >= a * atr14[t] else 0`
+### Decision (locked)
 
-### 3.2 BreakStructure labels (optional)
-- `BreakUp = 1` if `max(close_future) > last_swing_high(t)`
-- `BreakDown = 1` if `min(close_future) < last_swing_low(t)`
-- `BreakStructure = BreakUp OR BreakDown`
+- Each training row corresponds to a single anchor time `t0`
+- Features are computed from **past window only**: `[t0-L+1 .. t0]`
+- Label uses future window only: `[t0+1 .. t0+K2]`
 
-### Deliverables
-- `artifacts/processed/labels_strongmove.parquet`
-- `artifacts/processed/labels_breakstructure.parquet` (optional)
+Recommended defaults:
 
-### Acceptance criteria
-- Last K rows are dropped (cannot label due to missing future window)
-- Label distribution (positive rate) is reported
+- `L = 96` bars (24h) or `L = 48` (12h) — tune later
+
+### Outputs
+
+- `artifacts/processed/dataset_model2.parquet`
+- `artifacts/reports/model2_dataset_report.json`
+
+### Acceptance
+
+- No future bars used in features
+- Time monotonic, unique per `t0`
 
 ---
 
-## Phase 4 — Build training dataset + time split
+## Phase 11 — Optional: Build “zone-sample” index (for UI selection)
 
 ### Goal
-Ghép features + labels và chia train/val/test theo thời gian.
 
-### Tasks
-- [x] 4.1 Merge features_all + labels_strongmove
-- [x] 4.2 Time-based split (no shuffle)
-- [x] 4.3 Save split metadata
+UI bấm vào 1 zone → map sang anchor time `t0` để gọi Model 2 predict.
 
-### Deliverables
-- `artifacts/processed/dataset_model1.parquet`
-- `artifacts/processed/train.parquet`
-- `artifacts/processed/val.parquet`
-- `artifacts/processed/test.parquet`
-- `artifacts/processed/splits.json`
+### How
 
-### Acceptance criteria
-- Splits are strictly ordered by time
-- No overlap between splits
+- For each zone, define:
+  - `t0 = zone.to_time` (zone end)
+  - Keep: `zone_id, from_time, to_time, from_index, to_index, top/bottom`
+- Save a UI-friendly mapping file:
+  - `artifacts/reports/model2_zone_index_test.json`
+
+### Acceptance
+
+- Every zone maps to exactly 1 anchor time `t0` in test timeline
 
 ---
 
-## Phase 5 — Train Model 1 (Hot Zone Scanner)
+## Phase 12 — Train Model 2 (multiclass baseline)
 
 ### Goal
-Train classifier to output `zoneRisk = P(StrongMove)`.
 
-### Tasks
-- [x] 5.1 Train baseline model (LogReg or XGBoost/LightGBM)
-- [x] 5.2 Save model artifact
-- [x] 5.3 Evaluate on val/test
+Train baseline model for `Long/Short/Neutral`.
+
+### Baseline model (locked)
+
+- Multinomial Logistic Regression (fast, explainable)
+
+### Outputs
+
+- `artifacts/models/model2.pkl`
+- `artifacts/reports/model2_metrics.json`
 
 ### Metrics (required)
-- ROC-AUC
-- PR-AUC
-- Precision/Recall/F1 at chosen threshold(s)
+
+- Macro F1
+- Per-class precision/recall/F1
 - Confusion matrix
+- Calibration bins (optional)
 
-### Deliverables
-- `artifacts/models/model1.pkl` (or `.json/.txt` depending on framework)
-- `artifacts/reports/model1_metrics.json`
+### Acceptance
 
-### Acceptance criteria
-- Model can load and predict on test
-- Metrics file exists and contains all required metrics
+- Model loads and predicts on test
+- Metrics complete
 
 ---
 
-## Phase 6 — Offline AI test (scanner quality) + hot zone extraction
+## Phase 13 — Model 2 “Context Toggle” upgrade (use_model1_context = optional)
 
 ### Goal
-Chứng minh AI scanner hữu dụng trước khi làm BE/FE.
 
-### Tasks
-- [x] 6.1 Predict `zoneRisk` for all test bars
-- [x] 6.2 Threshold report (hit rate vs threshold)
-- [x] 6.3 Group consecutive high-risk bars into zones
-- [x] 6.4 Leakage sanity checks
+Cho phép Model 2 nhận thêm context từ Model 1 khi user bật option.
 
-### 6.1 Output series
-- Add column `zoneRisk` to test set
+### Design (locked)
 
-### 6.2 Threshold report (required)
-For thresholds: 0.6, 0.7, 0.75, 0.8
-- hit_rate = P(StrongMove=1 | zoneRisk>=thr)
-- coverage = %bars flagged as hot
-- hit_within_k_rate (optional, future-window early warning)
+- Keep two feature sets:
+  1. **Base features** (candle-only) — always available
+  2. **Context features** (from Model 1) — optional
 
-### 6.3 Zone grouping (required)
-Group consecutive bars where `zoneRisk >= 0.75` into zones:
-Output per zone:
+Context feature candidates:
+
+- `zoneRisk(t0)` (from `zoneRisk_test.parquet` during offline eval)
+- `zoneRisk_slope_recent` (e.g. slope last 8 bars ending at t0)
+- `hot_threshold_used` (constant, optional)
+- If zone selected: `zone_len_bars`, `max_risk`, `avg_risk` (from `hotzones_ui.json`)
+
+### Config (locked)
+
+- `model2.use_model1_context_default: false`
+- `model2.allow_model1_context: true`
+
+### Training strategy (recommended)
+
+- Train **two artifacts**:
+  - `model2_base.pkl` (no context)
+  - `model2_plus.pkl` (with context)
+- Report comparison:
+  - `artifacts/reports/model2_ablation_report.json`
+
+### Acceptance
+
+- Both models can predict
+- Plus model is only used when toggle=true
+
+---
+
+## Phase 14 — Offline “Click Zone → Predict” export (UI-ready)
+
+### Goal
+
+Xuất kết quả để FE demo hiển thị panel khi click zone.
+
+### Output schema (locked)
+
+`artifacts/reports/model2_predictions_test.json`:
+
 - `zone_id`
-- `from_time`, `to_time`
-- `from_index`, `to_index`
-- `max_risk`, `avg_risk`
-- `count_hot_bars`
-- `count_bars_total`
+- `t0_time`
+- `use_model1_context` (true/false)
+- `signal`
+- `probabilities`
+- `confidence`
+- Optional rule-based:
+  - `entry`, `stop_loss`, `take_profit`
+- `notes` / `explanations` (top features)
 
-### 6.4 Leakage checks (required)
-- Ensure labels use future only; features use present/past only.
-- Document any potential leakage risks.
+### Acceptance
 
-### Deliverables
-- `artifacts/reports/zoneRisk_test.parquet`
-- `artifacts/reports/scanner_threshold_report.json`
-- `artifacts/reports/hotzones_test.json`
-- `artifacts/reports/leakage_checks.md`
-
-### Acceptance criteria
-- Report shows meaningful lift vs baseline (document baseline used)
-- hotzones json renders reasonable number of zones (not zero, not all bars)
+- Predict works for any `zone_id` in test
+- Output is static-json ready for FE
 
 ---
 
-## Final Output of v1 (What agent must deliver)
-- Raw data file: `artifacts/raw/BTCUSDT_15m.csv`
-- Dataset: `artifacts/processed/dataset_model1.parquet`
-- Splits: train/val/test parquet + `splits.json`
-- Model 1 artifact: `artifacts/models/model1.pkl`
-- Reports:
-  - `model1_metrics.json`
-  - `scanner_threshold_report.json`
-  - `hotzones_test.json`
-  - `leakage_checks.md`
+## v2 Deliverables (minimum)
+
+- `dataset_model2.parquet` + splits
+- `model2_base.pkl` + `model2_metrics.json`
+- (optional) `model2_plus.pkl` + `model2_ablation_report.json`
+- `model2_predictions_test.json` (UI-ready)
+- `model2_zone_index_test.json` (mapping zones → t0)
 
 ---
-
-## Notes / Decisions locked for v1
-- Timeframe: **15m**
-- Horizon: **K=12**
-- StrongMove threshold: **a=2.5 * ATR14**
-- v1 scope: **Model 1 only (scanner)**, **offline test only**
-- BE/FE + click-to-predict + Model 2 will be done in **version sau**
-
----
-```
