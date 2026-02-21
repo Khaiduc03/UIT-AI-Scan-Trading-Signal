@@ -31,6 +31,7 @@
 - Build phase-6 scanner report: `make run-scanner-report`
 - Build phase-6 hotzones: `make run-hotzones`
 - Run phase-6 leakage checks: `make run-leakage-checks`
+- Build phase-7 scanner tuning summary: `make run-scanner-tuning-summary`
 
 ## 5) No-lookahead rule
 - Any feature at time `t` must not use data from `t+1` onward.
@@ -41,3 +42,10 @@
 - Feature outputs in `artifacts/processed/` are generated artifacts.
 - Label outputs in `artifacts/processed/` and `artifacts/reports/` are generated artifacts.
 - Re-generate artifacts from scripts, do not hand-edit them.
+- Phase 7 tuning summary artifact: `artifacts/reports/scanner_tuning_summary.json`.
+
+## 7) Scanner freeze (v1)
+- `hot_threshold=0.80`
+- `min_zone_bars=2`
+- `max_gap_bars=1`
+- `report_thresholds=[0.60, 0.70, 0.75, 0.80, 0.85, 0.90]`

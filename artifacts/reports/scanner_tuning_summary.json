@@ -1,0 +1,36 @@
+{
+  "params": {
+    "hot_threshold": 0.8,
+    "min_zone_bars": 2,
+    "max_gap_bars": 1
+  },
+  "test_range": {
+    "start_time": "2025-10-10T01:30:00Z",
+    "end_time": "2026-01-31T21:00:00Z",
+    "test_rows": 10927,
+    "months_in_test": 3.79375
+  },
+  "density": {
+    "total_zones": 65,
+    "zones_per_month": 17.133443163097198,
+    "total_hot_bars": 342,
+    "coverage_hot_bars": 0.031298618101949296
+  },
+  "quality_at_hot_threshold": {
+    "threshold": 0.8,
+    "flagged_bars": 342,
+    "coverage": 0.031298618101949296,
+    "hit_rate": 0.9327485380116959,
+    "lift_vs_base": 1.3046778385629545,
+    "hit_within_k_rate": 0.9502923976608187,
+    "precision": 0.9327485380116959,
+    "recall": 0.040834613415258576,
+    "f1": 0.07824380672062792
+  },
+  "artifacts": {
+    "threshold_report": "artifacts/reports/scanner_threshold_report.json",
+    "hotzones_report": "artifacts/reports/hotzones_test.json",
+    "test_split": "artifacts/processed/test.parquet",
+    "output_summary": "artifacts/reports/scanner_tuning_summary.json"
+  }
+}

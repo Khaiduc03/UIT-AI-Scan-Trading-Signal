@@ -1,7 +1,9 @@
 PYTHON := .venv/bin/python
 PIP := .venv/bin/pip
+MAKEFLAGS += --no-print-directory
+.SILENT:
 
-.PHONY: setup dev lock check lint format test run-download run-validate run-features run-labels run-dataset run-dataset-checks run-train-model1 run-scanner-report run-hotzones run-leakage-checks run-all-phases summary-features summary-labels summary-dataset summary-train summary-scanner summary-hotzones summary-leakage clean
+.PHONY: setup dev lock check lint format test run-download run-validate run-features run-labels run-dataset run-dataset-checks run-train-model1 run-scanner-report run-hotzones run-leakage-checks run-scanner-tuning-summary run-all-phases summary-features summary-labels summary-dataset summary-train summary-scanner summary-hotzones summary-leakage clean
 
 setup:
 	python3 -m venv .venv
@@ -87,40 +89,55 @@ run-leakage-checks:
 	@echo "[run-leakage-checks] Run Phase 6 leakage and cross-artifact sanity checks."
 	$(PYTHON) src/evaluation/leakage_checks_phase6.py
 
+run-scanner-tuning-summary:
+	@echo "[run-scanner-tuning-summary] Build Phase 7 scanner tuning freeze summary."
+	$(PYTHON) src/evaluation/write_scanner_tuning_summary.py
+
 run-all-phases:
-	@echo "[run-all-phases] Running full pipeline Phase 1 -> Phase 6."
-	@echo "==================== Phase 1: Data Ingestion ===================="
+	@echo ""
+	@echo "==============================================================="
+	@echo "[PIPELINE] Full run Phase 1 -> Phase 6"
+	@echo "==============================================================="
+	@echo "[PHASE 1] Data Ingestion"
 	$(MAKE) run-download
 	$(MAKE) run-validate
-	@echo "==================== Phase 2: Feature Engineering ===================="
+	@echo "---------------------------------------------------------------"
+	@echo "[PHASE 2] Feature Engineering"
 	$(MAKE) run-features
 	$(MAKE) summary-features
-	@echo "==================== Phase 3: Labeling ===================="
+	@echo "---------------------------------------------------------------"
+	@echo "[PHASE 3] Labeling"
 	$(MAKE) run-labels
 	$(MAKE) summary-labels
-	@echo "==================== Phase 4: Dataset + Split ===================="
+	@echo "---------------------------------------------------------------"
+	@echo "[PHASE 4] Dataset + Split"
 	$(MAKE) run-dataset
 	$(MAKE) run-dataset-checks
 	$(MAKE) summary-dataset
-	@echo "==================== Phase 5: Model Training ===================="
+	@echo "---------------------------------------------------------------"
+	@echo "[PHASE 5] Model Training"
 	$(MAKE) run-train-model1
 	$(MAKE) summary-train
-	@echo "==================== Phase 6: Scanner + Hotzones + Leakage ===================="
+	@echo "---------------------------------------------------------------"
+	@echo "[PHASE 6] Scanner + Hotzones + Leakage Checks"
 	$(MAKE) run-scanner-report
 	$(MAKE) summary-scanner
 	$(MAKE) run-hotzones
 	$(MAKE) summary-hotzones
 	$(MAKE) run-leakage-checks
 	$(MAKE) summary-leakage
-	@echo "[run-all-phases] Completed."
+	@echo "==============================================================="
+	@echo "[PIPELINE] Completed"
+	@echo "==============================================================="
 
 summary-features:
 	@printf '%s\n' \
 		"import pandas as pd" \
 		"core = pd.read_parquet('artifacts/processed/features_core.parquet')" \
 		"struct = pd.read_parquet('artifacts/processed/features_structure.parquet')" \
-		"print(f'[summary-features] core_rows={len(core)} structure_rows={len(struct)}')" \
-		"print(f\"[summary-features] core_time={core['time'].iloc[0]} -> {core['time'].iloc[-1]}\")" | $(PYTHON)
+		"allf = pd.read_parquet('artifacts/processed/features_all.parquet')" \
+		"print(f'[summary-features] core_rows={len(core)} structure_rows={len(struct)} all_rows={len(allf)}')" \
+		"print(f\"[summary-features] all_time={allf['time'].iloc[0]} -> {allf['time'].iloc[-1]}\")" | $(PYTHON)
 
 summary-labels:
 	@printf '%s\n' \

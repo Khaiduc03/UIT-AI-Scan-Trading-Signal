@@ -12,7 +12,7 @@
 - [PASS] Feature leakage columns: No forbidden leakage columns in model features
 - [PASS] zoneRisk row alignment: test rows=10927 zoneRisk rows=10927
 - [PASS] zoneRisk time alignment: time column aligned between test and zoneRisk artifacts
-- [PASS] Threshold list alignment: report=[0.6, 0.7, 0.75, 0.8] config=[0.6, 0.7, 0.75, 0.8]
+- [PASS] Threshold list alignment: report=[0.6, 0.7, 0.75, 0.8, 0.85, 0.9] config=[0.6, 0.7, 0.75, 0.8, 0.85, 0.9]
 - [PASS] Hotzone count sanity: zones count looks reasonable
 - [PASS] Hotzone bar-count consistency: zone count_hot_bars matches recomputed values
 - [PASS] Label future horizon configured: horizon_k=12

@@ -91,6 +91,16 @@ python src/evaluation/extract_hotzones.py
 Outputs:
 - `artifacts/reports/hotzones_test.json`
 
+## Run scanner tuning freeze summary (Phase 7)
+
+```bash
+source .venv/bin/activate
+python src/evaluation/write_scanner_tuning_summary.py
+```
+
+Outputs:
+- `artifacts/reports/scanner_tuning_summary.json`
+
 ## Run leakage sanity checks (Phase 6 Prompt 3)
 
 ```bash
@@ -128,6 +138,7 @@ make run-train-model1 # train phase-5 baseline model + metrics report
 make run-scanner-report # phase-6 prompt 1: zoneRisk + threshold report
 make run-hotzones # phase-6 prompt 2: hotzone extraction
 make run-leakage-checks # phase-6 prompt 3: leakage + artifact sanity checks
+make run-scanner-tuning-summary # phase-7: scanner tuning freeze summary
 make run-all-phases # run full pipeline phase 1 -> phase 6
 ```
 
@@ -145,6 +156,14 @@ make run-all-phases # run full pipeline phase 1 -> phase 6
 - `make run-scanner-report`: tạo zoneRisk trên test + threshold quality report (>= threshold).
 - `make run-hotzones`: trích xuất hot zones từ zoneRisk với `max_gap_bars`.
 - `make run-leakage-checks`: sinh `leakage_checks.md` và kiểm tra chéo artifacts Phase 6.
+- `make run-scanner-tuning-summary`: tổng hợp báo cáo tuning scanner để freeze cấu hình cho v1.
+
+## Scanner Freeze (v1)
+
+- `hot_threshold=0.80`
+- `min_zone_bars=2`
+- `max_gap_bars=1`
+- `report_thresholds=[0.60, 0.70, 0.75, 0.80, 0.85, 0.90]`
 
 ## Project Structure
 

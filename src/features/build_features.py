@@ -153,6 +153,12 @@ def main():
 
     core_path = processed_dir / "features_core.parquet"
     structure_path = processed_dir / "features_structure.parquet"
+    features_all_path = Path(
+        cfg.get("features", {}).get(
+            "out_features_all",
+            str(processed_dir / "features_all.parquet"),
+        )
+    )
     processed_dir.mkdir(parents=True, exist_ok=True)
 
     # 2) Đọc dữ liệu raw.
@@ -194,16 +200,34 @@ def main():
     logger.info(f"Saving structure features to {structure_path}...")
     structure_df.to_parquet(structure_path, index=False)
 
-    logger.info(f"Done. core_rows={len(core_df)}, structure_rows={len(structure_df)}")
+    # 6) Merge thành features_all để downstream dùng trực tiếp nếu cần.
+    features_all_df = core_df.merge(
+        structure_df,
+        on="time",
+        how="inner",
+        validate="one_to_one",
+    )
+    logger.info(f"Saving merged features_all to {features_all_path}...")
+    features_all_path.parent.mkdir(parents=True, exist_ok=True)
+    features_all_df.to_parquet(features_all_path, index=False)
+
+    logger.info(
+        "Done. core_rows=%s, structure_rows=%s, features_all_rows=%s",
+        len(core_df),
+        len(structure_df),
+        len(features_all_df),
+    )
     logger.info(
         "Feature summary | raw_rows=%s | warmup_bars=%s | "
-        "core_time=%s -> %s | structure_time=%s -> %s | elapsed=%.2fs",
+        "core_time=%s -> %s | structure_time=%s -> %s | merged_time=%s -> %s | elapsed=%.2fs",
         len(raw_df),
         warmup_bars,
         core_df["time"].iloc[0] if len(core_df) else "n/a",
         core_df["time"].iloc[-1] if len(core_df) else "n/a",
         structure_df["time"].iloc[0] if len(structure_df) else "n/a",
         structure_df["time"].iloc[-1] if len(structure_df) else "n/a",
+        features_all_df["time"].iloc[0] if len(features_all_df) else "n/a",
+        features_all_df["time"].iloc[-1] if len(features_all_df) else "n/a",
         perf_counter() - start_time,
     )
 

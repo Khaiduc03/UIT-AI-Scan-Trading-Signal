@@ -17,9 +17,9 @@ Dựng project từ số 0, có cấu trúc rõ ràng, config thống nhất.
 
 ### Tasks
 
-- [ ] 0.1 Create repo + folder structure
-- [ ] 0.2 Add config file (single source of truth)
-- [ ] 0.3 Add README quickstart + commands
+- [x] 0.1 Create repo + folder structure
+- [x] 0.2 Add config file (single source of truth)
+- [x] 0.3 Add README quickstart + commands
 
 ### Folder structure (required)
 ```
@@ -69,8 +69,8 @@ Must include:
 Tải dữ liệu BTCUSDT 15m và lưu “raw reproducible”.
 
 ### Tasks
-- [ ] 1.1 Download candles BTCUSDT 15m (≥ 6 months, ideally 1–2 years)
-- [ ] 1.2 Data validation & data quality report
+- [x] 1.1 Download candles BTCUSDT 15m (≥ 6 months, ideally 1–2 years)
+- [x] 1.2 Data validation & data quality report
 
 ### Requirements
 Raw columns:
@@ -94,9 +94,9 @@ Time must be monotonic increasing, no duplicates.
 Tạo features tại thời điểm **t** (chỉ dùng quá khứ/hiện tại).
 
 ### Tasks
-- [ ] 2.1 Core features (volatility, returns, volume)
-- [ ] 2.2 Structure features (swings + distance to swings)
-- [ ] 2.3 Merge features into one table
+- [x] 2.1 Core features (volatility, returns, volume)
+- [x] 2.2 Structure features (swings + distance to swings)
+- [x] 2.3 Merge features into one table
 
 ### 2.1 Core features (minimum)
 Per bar:
@@ -138,7 +138,7 @@ Use swing/pivot logic (Lux-style):
 Tạo label “StrongMove” dùng tương lai **t+1..t+12**.
 
 ### Tasks
-- [ ] 3.1 Label StrongMove
+- [x] 3.1 Label StrongMove
 - [ ] 3.2 (Optional) Label BreakStructure (Up/Down)
 
 ### 3.1 StrongMove label (required)
@@ -167,9 +167,9 @@ For each bar t:
 Ghép features + labels và chia train/val/test theo thời gian.
 
 ### Tasks
-- [ ] 4.1 Merge features_all + labels_strongmove
-- [ ] 4.2 Time-based split (no shuffle)
-- [ ] 4.3 Save split metadata
+- [x] 4.1 Merge features_all + labels_strongmove
+- [x] 4.2 Time-based split (no shuffle)
+- [x] 4.3 Save split metadata
 
 ### Deliverables
 - `artifacts/processed/dataset_model1.parquet`
@@ -190,9 +190,9 @@ Ghép features + labels và chia train/val/test theo thời gian.
 Train classifier to output `zoneRisk = P(StrongMove)`.
 
 ### Tasks
-- [ ] 5.1 Train baseline model (LogReg or XGBoost/LightGBM)
-- [ ] 5.2 Save model artifact
-- [ ] 5.3 Evaluate on val/test
+- [x] 5.1 Train baseline model (LogReg or XGBoost/LightGBM)
+- [x] 5.2 Save model artifact
+- [x] 5.3 Evaluate on val/test
 
 ### Metrics (required)
 - ROC-AUC
@@ -216,28 +216,29 @@ Train classifier to output `zoneRisk = P(StrongMove)`.
 Chứng minh AI scanner hữu dụng trước khi làm BE/FE.
 
 ### Tasks
-- [ ] 6.1 Predict `zoneRisk` for all test bars
-- [ ] 6.2 Threshold report (hit rate vs threshold)
-- [ ] 6.3 Group consecutive high-risk bars into zones
-- [ ] 6.4 Leakage sanity checks
+- [x] 6.1 Predict `zoneRisk` for all test bars
+- [x] 6.2 Threshold report (hit rate vs threshold)
+- [x] 6.3 Group consecutive high-risk bars into zones
+- [x] 6.4 Leakage sanity checks
 
 ### 6.1 Output series
 - Add column `zoneRisk` to test set
 
 ### 6.2 Threshold report (required)
 For thresholds: 0.6, 0.7, 0.75, 0.8
-- hit_rate = P(StrongMove=1 | zoneRisk>thr)
+- hit_rate = P(StrongMove=1 | zoneRisk>=thr)
 - coverage = %bars flagged as hot
-- avg_lead_time (optional)
+- hit_within_k_rate (optional, future-window early warning)
 
 ### 6.3 Zone grouping (required)
-Group consecutive bars where `zoneRisk > 0.75` into zones:
+Group consecutive bars where `zoneRisk >= 0.75` into zones:
 Output per zone:
 - `zone_id`
 - `from_time`, `to_time`
 - `from_index`, `to_index`
 - `max_risk`, `avg_risk`
-- `count_bars`
+- `count_hot_bars`
+- `count_bars_total`
 
 ### 6.4 Leakage checks (required)
 - Ensure labels use future only; features use present/past only.
