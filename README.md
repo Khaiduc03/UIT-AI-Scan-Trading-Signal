@@ -45,6 +45,17 @@ Outputs:
 - `artifacts/processed/labels_strongmove.parquet`
 - `artifacts/reports/labels_strongmove_report.json`
 
+## Run Model2 labeling baseline (Phase 9)
+
+```bash
+source .venv/bin/activate
+python src/labels/build_labels_model2.py
+```
+
+Outputs:
+- `artifacts/processed/labels_model2_bar.parquet`
+- `artifacts/reports/model2_label_distribution.json`
+
 ## Run dataset build + time split (Phase 4)
 
 ```bash
@@ -163,6 +174,7 @@ make run-download   # download raw OHLCV
 make run-validate   # validate raw data
 make run-features   # build phase-2 features
 make run-labels     # build phase-3 StrongMove labels
+make run-model2-labels # build phase-9 Model2 labels + distribution report
 make run-dataset    # build phase-4 dataset + time split
 make run-dataset-checks # check split consistency, class balance, drift
 make run-train-model1 # train phase-5 baseline model + metrics report
@@ -197,7 +209,7 @@ make run-all-phases # run full pipeline phase 1 -> phase 6
 
 ## Scanner Freeze (v1)
 
-- `hot_threshold=0.80`
+- `hot_threshold=0.75`
 - `min_zone_bars=2`
 - `max_gap_bars=1`
 - `report_thresholds=[0.60, 0.70, 0.75, 0.80, 0.85, 0.90]`

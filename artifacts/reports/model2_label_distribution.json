@@ -1,0 +1,58 @@
+{
+  "total_rows": 72841,
+  "class_counts": {
+    "long": 29903,
+    "short": 30430,
+    "neutral": 12508
+  },
+  "class_rates": {
+    "long": 0.41052429263738827,
+    "short": 0.41775922900564244,
+    "neutral": 0.1717164783569693
+  },
+  "label_id_mapping": {
+    "neutral": 0,
+    "long": 1,
+    "short": 2
+  },
+  "anchor": "bar",
+  "horizon_k": 12,
+  "atr_mult": 1.5,
+  "neutral_rule": "on_tie_or_below_threshold",
+  "mode": "magnitude",
+  "dropped_tail_rows": 12,
+  "dropped_due_to_atr_rows": 0,
+  "dropped_due_to_join_rows": 0,
+  "ambiguous_both_hit_rows": 9633,
+  "ambiguous_both_hit_rate": 0.1322469488337612,
+  "neutral_breakdown_counts": {
+    "below_threshold": 0,
+    "both_hit": 0,
+    "tie": 1,
+    "winner_but_below_thr": 12507
+  },
+  "ambiguous_both_hit_counts": {
+    "total": 9633,
+    "tie": 1,
+    "non_tie": 9632
+  },
+  "config_snapshot": {
+    "label2": {
+      "anchor": "bar",
+      "horizon_k": 12,
+      "atr_mult": 1.5,
+      "neutral_rule": "on_tie_or_below_threshold",
+      "mode": "magnitude"
+    },
+    "inputs": {
+      "raw_path": "artifacts/raw/BTCUSDT_15m.csv",
+      "features_core_path": "artifacts/processed/features_core.parquet"
+    }
+  },
+  "time_range": {
+    "start_time": "2024-01-04T03:00:00Z",
+    "end_time": "2026-01-31T21:00:00Z"
+  },
+  "output_labels_path": "artifacts/processed/labels_model2_bar.parquet",
+  "generated_at_utc": "2026-02-21T16:46:53Z"
+}

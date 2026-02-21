@@ -3,7 +3,7 @@ PIP := .venv/bin/pip
 MAKEFLAGS += --no-print-directory
 .SILENT:
 
-.PHONY: setup dev lock check lint format test run-download run-validate run-features run-labels run-dataset run-dataset-checks run-train-model1 run-scanner-report run-hotzones run-leakage-checks run-scanner-tuning-summary run-export-hotzones-ui run-export-zonerisk-points run-phase8-ui run-all-phases summary-features summary-labels summary-dataset summary-train summary-scanner summary-hotzones summary-leakage clean
+.PHONY: setup dev lock check lint format test run-download run-validate run-features run-labels run-model2-labels run-dataset run-dataset-checks run-train-model1 run-scanner-report run-hotzones run-leakage-checks run-scanner-tuning-summary run-export-hotzones-ui run-export-zonerisk-points run-phase8-ui run-all-phases summary-features summary-labels summary-dataset summary-train summary-scanner summary-hotzones summary-leakage clean
 
 setup:
 	python3 -m venv .venv
@@ -64,6 +64,10 @@ run-features:
 run-labels:
 	@echo "[run-labels] Build Phase 3 StrongMove labels and distribution report."
 	$(PYTHON) src/labels/build_labels.py
+
+run-model2-labels:
+	@echo "[run-model2-labels] Build Phase 9 Model2 labels (bar anchor) + distribution report."
+	$(PYTHON) src/labels/build_labels_model2.py
 
 run-dataset:
 	@echo "[run-dataset] Build Phase 4 dataset_model1 and time-based train/val/test splits."

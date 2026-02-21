@@ -93,6 +93,10 @@ label2:
   anchor: "bar"
   horizon_k: 12
   atr_mult: 1.5
+  neutral_rule: "on_tie_or_below_threshold"
+  mode: "magnitude" # future extension: "first_touch" / "triple_barrier"
+  out_labels: "artifacts/processed/labels_model2_bar.parquet"
+  out_report: "artifacts/reports/model2_label_distribution.json"
 
 # ------------------------------------------------------------
 # 4) SPLIT SETTINGS (bắt buộc time-based, KHÔNG shuffle)

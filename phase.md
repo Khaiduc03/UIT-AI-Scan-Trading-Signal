@@ -37,7 +37,7 @@
 
 # v2 — Model 2 Trade Signal (Offline First)
 
-## Phase 9 — Define Model 2 task + label set (zone-level)
+## Phase 9 — Define Model 2 task + label set (bar-level baseline)
 
 ### Goal
 
@@ -53,30 +53,32 @@ Chốt rõ: Model 2 dự đoán gì khi user bấm **Predict**.
 
 ### Label baseline (locked: Option A)
 
-**3-class direction by future move** (zone_end anchored)
+**3-class direction by future move** (bar anchored)
 
-For each sample at anchor time `t0` (zone end):
+For each sample at anchor time `t` (each bar):
 
-- Lookahead window: `t0+1 .. t0+K2`
+- Lookahead window: `t+1 .. t+K`
 - Compute:
-  - `up_move = max(high_future) - close[t0]`
-  - `down_move = close[t0] - min(low_future)`
+  - `up_move = max(high_future) - close[t]`
+  - `down_move = close[t] - min(low_future)`
 - Define:
-  - `Long` if `up_move >= b * ATR14(t0)` and `up_move > down_move`
-  - `Short` if `down_move >= b * ATR14(t0)` and `down_move > up_move`
+  - `Long` if `up_move >= b * ATR14(t)` and `up_move > down_move`
+  - `Short` if `down_move >= b * ATR14(t)` and `down_move > up_move`
   - else `Neutral`
 
 Params:
 
-- `K2`: default `12` (match v1), optional try `24` later
+- `K`: default `12` (match v1), optional try `24` later
 - `b`: default `1.5` (tune later)
+- `neutral_rule`: `on_tie_or_below_threshold`
 
 ### Deliverables
 
 - `docs/model2_label_spec.md`
 - Config add sections:
-  - `label2: { horizon_k2, atr_mult_b, neutral_rule }`
+  - `label2: { anchor, horizon_k, atr_mult, neutral_rule }`
   - `model2: { use_model1_context_default: false }`
+- `artifacts/processed/labels_model2_bar.parquet`
 - `artifacts/reports/model2_label_distribution.json`
 
 ### Acceptance

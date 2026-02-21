@@ -25,6 +25,7 @@
 - Validate raw data: `make run-validate`
 - Build phase-2 features: `make run-features`
 - Build phase-3 labels: `make run-labels`
+- Build phase-9 model2 labels baseline: `make run-model2-labels`
 - Build phase-4 dataset split: `make run-dataset`
 - Run post-split checks: `make run-dataset-checks`
 - Train phase-5 baseline model: `make run-train-model1`
@@ -44,6 +45,9 @@
 - Keep venv and caches out of git.
 - Feature outputs in `artifacts/processed/` are generated artifacts.
 - Label outputs in `artifacts/processed/` and `artifacts/reports/` are generated artifacts.
+- Phase 9 model2 labels:
+- `artifacts/processed/labels_model2_bar.parquet`
+- `artifacts/reports/model2_label_distribution.json`
 - Re-generate artifacts from scripts, do not hand-edit them.
 - Phase 7 tuning summary artifact: `artifacts/reports/scanner_tuning_summary.json`.
 - Phase 8 UI artifacts:
@@ -51,7 +55,7 @@
 - `artifacts/reports/zoneRisk_points.json`
 
 ## 7) Scanner freeze (v1)
-- `hot_threshold=0.80`
+- `hot_threshold=0.75`
 - `min_zone_bars=2`
 - `max_gap_bars=1`
 - `report_thresholds=[0.60, 0.70, 0.75, 0.80, 0.85, 0.90]`
